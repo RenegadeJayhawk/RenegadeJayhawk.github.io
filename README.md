@@ -25,16 +25,16 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 - **Tailwind CSS** - Utility-first CSS framework
 - **Google Fonts** - Inter font family
 
-## � Project Structure
+## 📂 Project Structure
 
-```
+```text
 ├── index.html      # Main HTML file with all sections
 ├── app.js          # JavaScript for navigation and Chart.js configuration
 ├── styles.css      # Custom CSS styles and timeline components
 └── README.md       # This file
 ```
 
-## � Sections
+## 🎯 Sections
 
 1. **Overview** - Professional summary and core competencies
 2. **Career Timeline** - Visual timeline of career progression
@@ -47,7 +47,7 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 - **Color Palette**: Calm Harmony (Light Gray, Slate, Teal)
 - **Typography**: Inter font family for modern readability
 - **Layout**: Card-based grid system for scannable content
-- **Visualizations**: 
+- **Visualizations**:
   - Horizontal bar chart for AI skills
   - Timeline for career progression
   - KPI cards for achievements
@@ -57,16 +57,17 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 
 This site is automatically deployed to GitHub Pages from the `main` branch.
 
-### Deployment Steps:
+### Deployment Steps
 
 1. Push your changes to GitHub:
-   ```bash
-   git add .
-   git commit -m "Update resume content"
-   git push origin main
-   ```
 
-2. Configure GitHub Pages:
+```bash
+git add .
+git commit -m "Update resume content"
+git push origin main
+```
+
+1. Configure GitHub Pages:
    - Go to repository Settings
    - Navigate to Pages section
    - Select `main` branch as source
@@ -102,7 +103,7 @@ Then visit `http://localhost:8000` in your browser.
 
 ## 📧 Contact
 
-- **Email**: bradallen25010@frontier.com
+- **Email**: [bradallen25010@frontier.com](mailto:bradallen25010@frontier.com)
 - **LinkedIn**: [linkedin.com/in/bradallen-techleader](https://linkedin.com/in/bradallen-techleader)
 
 ## 📝 License
