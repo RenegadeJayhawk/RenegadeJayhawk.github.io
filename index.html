@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brad Allen - AI Strategy & Engineering Leader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-xl font-bold">Brad Allen</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#" class="nav-link active" onclick="showSection('overview', this)">Overview</a>
+                            <a href="#" class="nav-link" onclick="showSection('timeline', this)">Career Timeline</a>
+                            <a href="#" class="nav-link" onclick="showSection('ai-focus', this)">AI Focus</a>
+                            <a href="#" class="nav-link" onclick="showSection('achievements', this)">Key Achievements</a>
+                            <a href="#" class="nav-link" onclick="showSection('education-skills', this)">Education & Skills</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <select class="nav-link bg-gray-700" onchange="showSection(this.value, this)" aria-label="Navigation menu">
+                        <option value="overview" selected>Overview</option>
+                        <option value="timeline">Career Timeline</option>
+                        <option value="ai-focus">AI Focus</option>
+                        <option value="achievements">Key Achievements</option>
+                        <option value="education-skills">Education & Skills</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+        <!-- Section 1: Overview -->
+        <section data-section="overview" class="active">
+            <div class="bg-white shadow-lg rounded-lg p-8 md:p-12">
+                <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">Brad Allen</h1>
+                <h2 class="text-2xl font-semibold text-teal-600 mt-2">AI Strategy & Engineering Leader</h2>
+                <h3 class="text-xl font-medium text-gray-600 mt-1">Driving Enterprise Innovation Through Responsible AI Adoption</h3>
+                
+                <p class="mt-8 text-lg text-gray-700 leading-relaxed">
+                    Hello! This interactive application is a visual exploration of my 20+ year career, my strategic pivot to AI leadership, and my portfolio of work.
+                </p>
+                <p class="mt-6 text-lg text-gray-700 leading-relaxed">
+                    I am a senior technology leader with a proven track record guiding organizations into the AI era. An early adopter of Generative AI since its public emergence in 2022, I have since led Hyundai Capital America's AI adoption strategy—founding and leading its AI Interest Group, developing GenAI prototypes, and advising executive leadership on enterprise enablement. Certified through MIT xPRO in Designing and Building AI Products and Services, I am passionate about translating technical depth, engineering rigor, and responsible innovation into measurable business impact.
+                </p>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Core Competencies</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">AI Leadership</span>
+                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">Generative AI Strategy</span>
+                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">Applied AI Innovation</span>
+                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">LLMs & NLP</span>
+                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">AI Governance</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Full-Stack Architecture</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Secure SDLC</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Cloud & Data Systems</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Team Building</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Agile Delivery</span>
+                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Responsible AI Practices</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Career Timeline -->
+        <section data-section="timeline">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Career Timeline</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                My career is built on a foundation of delivering complex software in demanding environments. This timeline shows my progression from hands-on technologist to senior leader, culminating in my current role driving AI adoption.
+            </p>
+
+            <div class="relative max-w-4xl mx-auto">
+                <div class="timeline-line hidden md:block"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">HCA</div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold text-slate-800">Senior Manager, Application Delivery</h3>
+                        <p class="text-md font-semibold text-gray-600">Hyundai Capital America | 2023 – Present</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                            <li>Founded and led the HCA AI Interest Group, accelerating safe and strategic AI adoption.</li>
+                            <li>Created AI Agents to help staff learn Prompt Engineering through a Teams chatbot.</li>
+                            <li>Designed and led development of multiple Generative AI prototypes.</li>
+                            <li>Presented a GenAI knowledge base proposal to the AI Council, showing potential 25-30% reduction in onboarding time.</li>
+                            <li>Directed full-stack teams maintaining 99.9% SLA compliance.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">D</div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold text-slate-800">Senior Engagement Manager (Contract)</h3>
+                        <p class="text-md font-semibold text-gray-600">Deloitte (via Insight Global) | 2022 – 2023</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                            <li>Directed distributed Agile teams across multiple time zones, ensuring timely delivery of enterprise software.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">A</div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold text-slate-800">Vice President of Solution Delivery</h3>
+                        <p class="text-md font-semibold text-gray-600">Achieve Internet | 2021 – 2021</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                            <li>Led PMO, QA, and Support organizations, formalizing project delivery processes and establishing company-wide development standards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">S</div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold text-slate-800">Director of Solution Delivery & Platform Manager</h3>
+                        <p class="text-md font-semibold text-gray-600">STRAVISO | 2019 – 2020</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                            <li>Directed development of secure SaaS solutions for clients like AT&T, CenturyLink, and Honeywell.</li>
+                            <li>Initiated the company's first security audit and VAPT program.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">R</div>
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold text-slate-800">Principal Applications Technologist</h3>
+                        <p class="text-md font-semibold text-gray-600">Raytheon | 2003 – 2019</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
+                            <li>Awarded the Raytheon CIO Excellence in IT and Excellence in Technology Awards.</li>
+                            <li>Pioneered the organization's first Agile initiative, leading to 338% ROI and $62M in cost savings.</li>
+                            <li>Advised executive management on technology portfolios exceeding $40M in value.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 3: AI Focus -->
+        <section data-section="ai-focus">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">AI Focus Dashboard</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                AI is not just a technology; it's a strategic business driver. This dashboard highlights my work in Generative AI, from professional initiatives at Hyundai to personal projects, showcasing my hands-on experience in building and strategizing AI solutions.
+            </p>
+
+            <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Professional AI Impact (Hyundai Capital America)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-lg font-semibold text-teal-700">AI Adoption & Community</h4>
+                        <p class="mt-2 text-gray-700">Founded and led the HCA AI Interest Group, accelerating AI education, ethics discussions, and prototype development across the enterprise.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-lg font-semibold text-teal-700">AI Agent Development</h4>
+                        <p class="mt-2 text-gray-700">Created AI Agents integrated with Microsoft Teams to actively help staff learn and apply effective Prompt Engineering.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-lg font-semibold text-teal-700">GenAI Prototyping</h4>
+                        <p class="mt-2 text-gray-700">Designed and led the development of multiple Generative AI prototypes using LLMs for automation and new natural language interfaces.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner md:col-span-2 lg:col-span-3">
+                        <h4 class="text-lg font-semibold text-teal-700">Executive Strategy & ROI</h4>
+                        <p class="mt-2 text-gray-700">Presented a GenAI-powered knowledge base proposal to the AI Council, demonstrating a potential 25–30% reduction in onboarding time and duplicate work.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">AI & Innovation Projects (Hands-On)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <h4 class="text-lg font-semibold text-teal-700">AI-Driven Workflow & Security</h4>
+                        <p class="mt-2 text-gray-700">Prototyped an NLP Prompt Optimization Agent for Microsoft Teams and a Phishing Pre-Warning Email Scanner for early anomaly detection.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <h4 class="text-lg font-semibold text-teal-700">Data Aggregation & Analysis</h4>
+                        <p class="mt-2 text-gray-700">Built a multi-source Shopping Aggregator (Craigslist, Facebook) and an automated Software Tools Comparison SPA for data-driven tech selection.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <h4 class="text-lg font-semibold text-teal-700">User-Facing AI Applications</h4>
+                        <p class="mt-2 text-gray-700">Designed and built a QR Code Feasibility Analyzer and a Garden Planner & Plant Identifier using AI-based visual and contextual validation.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <h4 class="text-lg font-semibold text-teal-700">Early Adopter (Since 2022)</h4>
+                        <p class="mt-2 text-gray-700">Deep experimentation with GPT-based solutions for workflow automation and advanced prompt optimization techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Key Achievements -->
+        <section data-section="achievements">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Key Achievements</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                Data tells a story. Here are the most significant, measurable impacts I've delivered throughout my career, from pioneering Agile at Raytheon to ensuring rock-solid reliability for enterprise systems.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="kpi-card">
+                    <div class="kpi-title">Cost Savings (Raytheon)</div>
+                    <div class="kpi-value">$62M</div>
+                    <div class="kpi-context">From a single Agile initiative over five years.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Return on Investment (Raytheon)</div>
+                    <div class="kpi-value">338%</div>
+                    <div class="kpi-context">On the organization's first-ever Agile project.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Portfolio Value (Raytheon)</div>
+                    <div class="kpi-value">$40M+</div>
+                    <div class="kpi-context">Advised executive management on portfolios of this value.</div>
+                </div>
+                 <div class="kpi-card">
+                    <div class="kpi-title">System Availability (Hyundai)</div>
+                    <div class="kpi-value">99.9%</div>
+                    <div class="kpi-context">Maintained SLA compliance for enterprise applications.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Education & Skills -->
+        <section data-section="education-skills">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Education & Skills</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                Continuous learning is a core part of my identity. This section details my formal education, my advanced certifications in AI and Security, and a comprehensive breakdown of my technical and strategic skill set.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Left Column: Education & Certs -->
+                <div class="bg-white shadow-lg rounded-lg p-8">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Education & Certifications</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-700">MIT xPRO</h4>
+                            <p class="text-gray-700">Designing and Building AI Products and Services (Oct 2025)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-700">Google Certified</h4>
+                            <p class="text-gray-700">Prompt Engineering (Sept 2025)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-700">GIAC/SANS</h4>
+                            <p class="text-gray-700">Certified Web Application Security Specialist</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-700">DeVry University</h4>
+                            <p class="text-gray-700">B.S., Computer Information Systems</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-700">Other Certifications</h4>
+                            <p class="text-gray-700">Certified Scrum Master (CSM) | Six Sigma Certified Specialist</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Skills Visualization -->
+                <div class="bg-white shadow-lg rounded-lg p-8">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6">AI Skill Focus</h3>
+                    <p class="text-gray-600 mb-6">This chart visualizes my core areas of focus and expertise within the AI and Machine Learning domain.</p>
+                    <div class="chart-container">
+                        <canvas id="aiSkillsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Skills Breakdown -->
+            <div class="bg-white shadow-lg rounded-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-8">AI & Technical Skills Matrix</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">AI & Machine Learning</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Generative AI</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">LLMs (GPT, Claude, Gemini)</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">NLP</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Prompt Engineering</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Applied AI Prototyping</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Responsible AI Practices</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">AI Tools & Ecosystem</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">ChatGPT</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Gemini</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Claude</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Hugging Face</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Perplexity</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">OpenAI APIs</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">Engineering & Architecture</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">.NET/C#</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Azure</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">SQL Server</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Microservices</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">CI/CD</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">API Design</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">Leadership & Strategy</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">AI Adoption Programs</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">AI Literacy Enablement</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Agile (Scrum, SAFe)</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Team Development</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Cross-Functional Leadership</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">Security & Compliance</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Application Security (VAPT)</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Secure SDLC</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Risk Management</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Data Governance</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-3">Product & Innovation</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">AI Product Strategy</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">User-Centered AI Design</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Prototype-to-Production</span>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Technical Communication</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2025 Brad Allen. This is an interactive resume application.</p>
+            <p class="mt-2">Contact: bradallen25010@frontier.com | <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 underline">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
