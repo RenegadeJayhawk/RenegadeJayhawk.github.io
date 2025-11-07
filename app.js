@@ -142,23 +142,12 @@ function showSection(sectionId, element) {
             trackSectionView(sectionId);
         }
     }, 50);
-
-    // Update navigation active states
-    if (element) {
-        if (element.tagName === 'SELECT') {
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
-            const targetLink = document.querySelector(`.nav-link[onclick*="${sectionId}"]`);
-            if (targetLink) {
-                targetLink.classList.add('active');
-            }
-        } else if (element.tagName === 'A') {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            element.classList.add('active');
-        }
-    }
+    
+    // Update active nav link for keyboard navigation
+    updateActiveNavLink(element);
+    
+    // Announce section change to screen readers
+    announceToScreenReader(`Navigated to ${sectionId} section`);
 }
 
 function wrapText(text, maxCharsPerLine) {
@@ -183,15 +172,20 @@ function toggleExpand(button) {
     const content = button.previousElementSibling;
     const icon = button.querySelector('i');
     const span = button.querySelector('span');
+    const isExpanded = content.classList.contains('expanded');
     
-    if (content.classList.contains('expanded')) {
+    if (isExpanded) {
         content.classList.remove('expanded');
         icon.style.transform = 'rotate(0deg)';
         span.textContent = 'Show more';
+        button.setAttribute('aria-expanded', 'false');
+        announceToScreenReader('Content collapsed');
     } else {
         content.classList.add('expanded');
         icon.style.transform = 'rotate(180deg)';
         span.textContent = 'Show less';
+        button.setAttribute('aria-expanded', 'true');
+        announceToScreenReader('Content expanded');
     }
 }
 
@@ -207,12 +201,26 @@ function openContactModal() {
             event_category: 'Engagement'
         });
     }
+    
+    // Focus first input for accessibility
+    setTimeout(() => {
+        const firstInput = modal.querySelector('input');
+        if (firstInput) firstInput.focus();
+    }, 100);
+    
+    announceToScreenReader('Contact form opened');
 }
 
 function closeContactModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.remove('show');
     document.body.style.overflow = 'auto';
+    
+    // Return focus to the button that opened the modal
+    const contactButton = document.querySelector('[onclick*="openContactModal"]');
+    if (contactButton) contactButton.focus();
+    
+    announceToScreenReader('Contact form closed');
 }
 
 // Close modal when clicking outside
@@ -275,6 +283,110 @@ function downloadResume() {
     // link.download = 'Brad-Allen-Resume.pdf';
     // link.click();
 }
+
+// ==========================================
+// ACCESSIBILITY HELPERS
+// ==========================================
+
+// Update active navigation link
+function updateActiveNavLink(element) {
+    if (!element) return;
+    
+    // Remove active class and aria-current from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+    });
+    
+    // Add active class and aria-current to clicked link
+    if (element.classList && element.classList.contains('nav-link')) {
+        element.classList.add('active');
+        element.setAttribute('aria-current', 'page');
+    }
+}
+
+// Announce to screen readers using ARIA live region
+function announceToScreenReader(message) {
+    let liveRegion = document.getElementById('aria-live-region');
+    
+    if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.id = 'aria-live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.className = 'sr-only';
+        document.body.appendChild(liveRegion);
+    }
+    
+    // Clear and set new message
+    liveRegion.textContent = '';
+    setTimeout(() => {
+        liveRegion.textContent = message;
+    }, 100);
+}
+
+// Handle keyboard navigation for cards
+function setupKeyboardNavigation() {
+    const cards = document.querySelectorAll('.project-card, .achievement-card, .testimonial-card, .article-card, .repo-card');
+    
+    cards.forEach(card => {
+        // Make cards focusable
+        if (!card.hasAttribute('tabindex')) {
+            card.setAttribute('tabindex', '0');
+        }
+        
+        // Handle Enter and Space key for card interactions
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const link = card.querySelector('a');
+                if (link) {
+                    link.click();
+                }
+            }
+        });
+    });
+}
+
+// Trap focus within modal for accessibility
+function trapFocusInModal(modal) {
+    const focusableElements = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    
+    modal.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusable) {
+                    e.preventDefault();
+                    lastFocusable.focus();
+                }
+            } else {
+                if (document.activeElement === lastFocusable) {
+                    e.preventDefault();
+                    firstFocusable.focus();
+                }
+            }
+        }
+        
+        // Close modal on Escape key
+        if (e.key === 'Escape') {
+            closeContactModal();
+        }
+    });
+}
+
+// Initialize accessibility features on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setupKeyboardNavigation();
+    
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+        trapFocusInModal(modal);
+    }
+});
 
 // Dark Mode Toggle
 function toggleDarkMode() {

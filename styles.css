@@ -836,6 +836,190 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* ==========================================
+   ACCESSIBILITY - SKIP LINK
+   ========================================== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0d9488;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   ACCESSIBILITY - FOCUS STATES
+   ========================================== */
+
+/* Enhanced focus states for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[onclick]:focus,
+[tabindex]:not([tabindex="-1"]):focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+}
+
+/* Dark mode focus states */
+body.dark-mode a:focus,
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    outline-color: #14b8a6;
+}
+
+/* Navigation link focus states */
+.nav-link:focus {
+    outline: 3px solid #14b8a6;
+    outline-offset: 2px;
+    background-color: rgba(20, 184, 166, 0.1);
+}
+
+/* Button focus states with visible indicator */
+button:focus-visible {
+    outline: 3px solid #14b8a6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.2);
+}
+
+/* Card focus states for keyboard navigation */
+.project-card:focus,
+.achievement-card:focus,
+.testimonial-card:focus,
+.article-card:focus,
+.repo-card:focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+    transform: translateY(-3px);
+}
+
+/* Timeline expand button focus */
+button[onclick*="toggleExpand"]:focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+}
+
+/* Certification badge focus */
+.certification-badge:focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+    transform: translateY(-2px);
+}
+
+/* Social icon focus states */
+.social-icon:focus,
+.social-icon-footer:focus {
+    outline: 3px solid #14b8a6;
+    outline-offset: 2px;
+    transform: scale(1.1);
+}
+
+/* Modal close button focus */
+.modal-content button[onclick*="closeContactModal"]:focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+}
+
+/* Ensure focus is visible in all states, not just focus-visible */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   ACCESSIBILITY - KEYBOARD NAVIGATION
+   ========================================== */
+
+/* Make cards keyboard focusable */
+.project-card,
+.achievement-card,
+.testimonial-card,
+.article-card,
+.repo-card {
+    position: relative;
+}
+
+/* Improve clickable area for better accessibility */
+.nav-link,
+.certification-badge,
+button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Skip to main content on focus */
+.skip-link:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: absolute;
+    width: auto;
+    z-index: 9999;
+}
+
+/* ==========================================
+   ACCESSIBILITY - HIGH CONTRAST MODE
+   ========================================== */
+
+@media (prefers-contrast: high) {
+    /* Increase contrast for better visibility */
+    body {
+        color: #000;
+        background: #fff;
+    }
+    
+    .nav-link,
+    button {
+        border: 2px solid currentColor;
+    }
+    
+    .shadow-lg,
+    .shadow-md {
+        box-shadow: 0 0 0 2px currentColor !important;
+    }
+}
+
+/* ==========================================
+   EXISTING STYLES CONTINUE BELOW
+   ========================================== */
+
 /* Lazy load images - add loading attribute to img tags */
 img {
     height: auto;

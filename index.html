@@ -53,9 +53,12 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Header & Navigation -->
     <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
@@ -157,8 +160,8 @@
         </section>
 
         <!-- Section 2: Career Timeline -->
-        <section data-section="timeline">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Career Timeline</h2>
+        <section data-section="timeline" aria-labelledby="timeline-heading">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="timeline-heading">Career Timeline</h2>
             <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
                 My career is built on a foundation of delivering complex software in demanding environments. This timeline shows my progression from hands-on technologist to senior leader, culminating in my current role driving AI adoption.
             </p>
@@ -347,8 +350,8 @@
         </section>
 
         <!-- Section 4: Key Achievements -->
-        <section data-section="achievements">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Key Achievements</h2>
+        <section data-section="achievements" aria-labelledby="achievements-heading">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="achievements-heading">Key Achievements</h2>
             <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
                 Data tells a story. Here are the most significant, measurable impacts I've delivered throughout my career, from pioneering Agile at Raytheon to ensuring rock-solid reliability for enterprise systems.
             </p>
@@ -377,8 +380,8 @@
         </section>
 
         <!-- Section 5: Education & Skills -->
-        <section data-section="education-skills">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Education & Skills</h2>
+        <section data-section="education-skills" aria-labelledby="education-skills-heading">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="education-skills-heading">Education & Skills</h2>
             <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
                 Continuous learning is a core part of my identity. This section details my formal education, my advanced certifications in AI and Security, and a comprehensive breakdown of my technical and strategic skill set.
             </p>
@@ -698,8 +701,8 @@
         </section>
 
         <!-- Section 6: Testimonials & Recommendations -->
-        <section data-section="testimonials">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Testimonials & Recommendations</h2>
+        <section data-section="testimonials" aria-labelledby="testimonials-heading">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="testimonials-heading">Testimonials & Recommendations</h2>
             <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
                 Feedback from colleagues, clients, and leadership throughout my career journey.
             </p>
@@ -918,8 +921,8 @@
         </section>
 
         <!-- Section 7: Contributions & Open Source -->
-        <section data-section="contributions">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Contributions & Open Source</h2>
+        <section data-section="contributions" aria-labelledby="contributions-heading">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="contributions-heading">Contributions & Open Source</h2>
             <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
                 My contributions to the developer community through open source projects, code repositories, and collaborative work.
             </p>
@@ -1122,28 +1125,28 @@
     </footer>
 
     <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
+    <div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">Get in Touch</h2>
-                <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                <h2 class="text-2xl font-bold text-slate-800" id="contact-modal-title">Get in Touch</h2>
+                <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700 text-2xl" aria-label="Close contact modal">&times;</button>
             </div>
             <form id="contactForm" onsubmit="handleContactSubmit(event)">
                 <div class="mb-4">
-                    <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
-                    <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <label for="name" class="block text-gray-700 font-medium mb-2">Name <span aria-label="required">*</span></label>
+                    <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" aria-required="true">
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email <span aria-label="required">*</span></label>
+                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" aria-required="true">
                 </div>
                 <div class="mb-4">
-                    <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
-                    <input type="text" id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <label for="subject" class="block text-gray-700 font-medium mb-2">Subject <span aria-label="required">*</span></label>
+                    <input type="text" id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" aria-required="true">
                 </div>
                 <div class="mb-6">
-                    <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                    <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+                    <label for="message" class="block text-gray-700 font-medium mb-2">Message <span aria-label="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" aria-required="true"></textarea>
                 </div>
                 <div class="flex gap-4">
                     <button type="submit" class="flex-1 bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md font-medium transition-all">
