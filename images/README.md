@@ -50,3 +50,12 @@ The site implements several performance optimizations:
 ## Current Images
 
 - `profile.jpg` - Brad Allen's professional headshot (400x400px, ~50KB)
+- `company-hyundai.jpg` - Hyundai Capital America logo (96x96px, ~15KB)
+- `company-deloitte.jpg` - Deloitte logo (96x96px, ~15KB)
+- `company-achieve.jpg` - Achieve Internet logo (96x96px, ~15KB)
+- `company-straviso.png` - STRAVISO logo (96x96px, PNG format)
+- `company-raytheon.png` - Raytheon logo (96x96px, PNG format)
+
+### Company Logos
+Company logos in the timeline use 96x96px (displayed at 48x48px) for retina support.
+Most logos are optimized to <15KB each. PNG format used for logos with transparency.
