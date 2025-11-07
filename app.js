@@ -1,6 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     showSection('overview', document.querySelector('.nav-link[onclick*="overview"]'));
     
+    // Initialize dark mode from localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkModeIcon').classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Animate skill bars when they come into view
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('style').match(/width:\s*(\d+%)/)[1];
+                });
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.skill-bar-container').forEach(container => {
+        observer.observe(container.parentElement);
+    });
+    
     const aiSkillsData = {
         labels: [
             'Generative AI', 
@@ -194,4 +220,20 @@ function downloadResume() {
     // link.href = 'brad-allen-resume.pdf';
     // link.download = 'Brad-Allen-Resume.pdf';
     // link.click();
+}
+
+// Dark Mode Toggle
+function toggleDarkMode() {
+    const body = document.body;
+    const icon = document.getElementById('darkModeIcon');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'disabled');
+    }
 }

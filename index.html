@@ -45,6 +45,9 @@
                     <button onclick="downloadResume()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md font-medium transition-all">
                         <i class="fas fa-download"></i> <span class="hidden sm:inline">Download PDF</span>
                     </button>
+                    <button onclick="toggleDarkMode()" class="flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -56,9 +59,18 @@
         <!-- Section 1: Overview -->
         <section data-section="overview" class="active">
             <div class="bg-white shadow-lg rounded-lg p-8 md:p-12">
-                <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">Brad Allen</h1>
-                <h2 class="text-2xl font-semibold text-teal-600 mt-2">AI Strategy & Engineering Leader</h2>
-                <h3 class="text-xl font-medium text-gray-600 mt-1">Driving Enterprise Innovation Through Responsible AI Adoption</h3>
+                <div class="flex flex-col md:flex-row gap-8 items-start mb-8">
+                    <div class="flex-shrink-0">
+                        <div class="profile-photo">
+                            <img src="https://via.placeholder.com/200x200/0d9488/ffffff?text=BA" alt="Brad Allen Profile Photo" class="w-48 h-48 rounded-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">Brad Allen</h1>
+                        <h2 class="text-2xl font-semibold text-teal-600 mt-2">AI Strategy & Engineering Leader</h2>
+                        <h3 class="text-xl font-medium text-gray-600 mt-1">Driving Enterprise Innovation Through Responsible AI Adoption</h3>
+                    </div>
+                </div>
                 
                 <p class="mt-8 text-lg text-gray-700 leading-relaxed">
                     Hello! This interactive application is a visual exploration of my 20+ year career, my strategic pivot to AI leadership, and my portfolio of work.
@@ -109,7 +121,9 @@
                 <div class="timeline-line hidden md:block"></div>
                 
                 <div class="timeline-item">
-                    <div class="timeline-dot">HCA</div>
+                    <div class="timeline-dot">
+                        <img src="https://via.placeholder.com/48x48/ffffff/0d9488?text=HCA" alt="Hyundai Capital America" class="company-logo">
+                    </div>
                     <div class="timeline-content">
                         <h3 class="text-xl font-bold text-slate-800">Senior Manager, Application Delivery</h3>
                         <p class="text-md font-semibold text-gray-600">Hyundai Capital America | 2023 – Present</p>
@@ -132,7 +146,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-dot">D</div>
+                    <div class="timeline-dot">
+                        <img src="https://via.placeholder.com/48x48/ffffff/0d9488?text=D" alt="Deloitte" class="company-logo">
+                    </div>
                     <div class="timeline-content">
                         <h3 class="text-xl font-bold text-slate-800">Senior Engagement Manager (Contract)</h3>
                         <p class="text-md font-semibold text-gray-600">Deloitte (via Insight Global) | 2022 – 2023</p>
@@ -151,7 +167,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-dot">A</div>
+                    <div class="timeline-dot">
+                        <img src="https://via.placeholder.com/48x48/ffffff/0d9488?text=A" alt="Achieve Internet" class="company-logo">
+                    </div>
                     <div class="timeline-content">
                         <h3 class="text-xl font-bold text-slate-800">Vice President of Solution Delivery</h3>
                         <p class="text-md font-semibold text-gray-600">Achieve Internet | 2021 – 2021</p>
@@ -170,7 +188,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-dot">S</div>
+                    <div class="timeline-dot">
+                        <img src="https://via.placeholder.com/48x48/ffffff/0d9488?text=S" alt="STRAVISO" class="company-logo">
+                    </div>
                     <div class="timeline-content">
                         <h3 class="text-xl font-bold text-slate-800">Director of Solution Delivery & Platform Manager</h3>
                         <p class="text-md font-semibold text-gray-600">STRAVISO | 2019 – 2020</p>
@@ -190,7 +210,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-dot">R</div>
+                    <div class="timeline-dot">
+                        <img src="https://via.placeholder.com/48x48/ffffff/0d9488?text=R" alt="Raytheon" class="company-logo">
+                    </div>
                     <div class="timeline-content">
                         <h3 class="text-xl font-bold text-slate-800">Principal Applications Technologist</h3>
                         <p class="text-md font-semibold text-gray-600">Raytheon | 2003 – 2019</p>
@@ -246,19 +268,31 @@
             <div class="bg-white shadow-lg rounded-lg p-8">
                 <h3 class="text-2xl font-bold text-slate-800 mb-6">AI & Innovation Projects (Hands-On)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <div class="project-thumbnail mb-4">
+                            <img src="https://via.placeholder.com/400x250/0d9488/ffffff?text=AI+Workflow" alt="AI-Driven Workflow Project" class="w-full h-48 object-cover rounded">
+                        </div>
                         <h4 class="text-lg font-semibold text-teal-700">AI-Driven Workflow & Security</h4>
                         <p class="mt-2 text-gray-700">Prototyped an NLP Prompt Optimization Agent for Microsoft Teams and a Phishing Pre-Warning Email Scanner for early anomaly detection.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <div class="project-thumbnail mb-4">
+                            <img src="https://via.placeholder.com/400x250/14b8a6/ffffff?text=Data+Aggregation" alt="Data Aggregation Project" class="w-full h-48 object-cover rounded">
+                        </div>
                         <h4 class="text-lg font-semibold text-teal-700">Data Aggregation & Analysis</h4>
                         <p class="mt-2 text-gray-700">Built a multi-source Shopping Aggregator (Craigslist, Facebook) and an automated Software Tools Comparison SPA for data-driven tech selection.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <div class="project-thumbnail mb-4">
+                            <img src="https://via.placeholder.com/400x250/2dd4bf/ffffff?text=User-Facing+AI" alt="User-Facing AI Applications" class="w-full h-48 object-cover rounded">
+                        </div>
                         <h4 class="text-lg font-semibold text-teal-700">User-Facing AI Applications</h4>
                         <p class="mt-2 text-gray-700">Designed and built a QR Code Feasibility Analyzer and a Garden Planner & Plant Identifier using AI-based visual and contextual validation.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
+                        <div class="project-thumbnail mb-4">
+                            <img src="https://via.placeholder.com/400x250/5eead4/ffffff?text=Early+Adopter" alt="Early Adopter Projects" class="w-full h-48 object-cover rounded">
+                        </div>
                         <h4 class="text-lg font-semibold text-teal-700">Early Adopter (Since 2022)</h4>
                         <p class="mt-2 text-gray-700">Deep experimentation with GPT-based solutions for workflow automation and advanced prompt optimization techniques.</p>
                     </div>
@@ -337,6 +371,180 @@
                     <p class="text-gray-600 mb-6">This chart visualizes my core areas of focus and expertise within the AI and Machine Learning domain.</p>
                     <div class="chart-container">
                         <canvas id="aiSkillsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Progress Bars -->
+            <div class="bg-white shadow-lg rounded-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-8">Technical Skills Proficiency</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-4">AI & Machine Learning</h4>
+                        <div class="space-y-4">
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Generative AI</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">LLMs & NLP</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Prompt Engineering</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">AI Prototyping</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-4">Engineering & Architecture</h4>
+                        <div class="space-y-4">
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">.NET/C#</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Azure Cloud</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Microservices</span>
+                                    <span class="text-sm font-medium text-gray-700">88%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">CI/CD & DevOps</span>
+                                    <span class="text-sm font-medium text-gray-700">82%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-4">Leadership & Strategy</h4>
+                        <div class="space-y-4">
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">AI Strategy</span>
+                                    <span class="text-sm font-medium text-gray-700">92%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Agile/Scrum</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Team Leadership</span>
+                                    <span class="text-sm font-medium text-gray-700">93%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 93%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Enterprise Architecture</span>
+                                    <span class="text-sm font-medium text-gray-700">87%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 87%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-4">Security & Compliance</h4>
+                        <div class="space-y-4">
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Application Security</span>
+                                    <span class="text-sm font-medium text-gray-700">88%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Secure SDLC</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Risk Management</span>
+                                    <span class="text-sm font-medium text-gray-700">82%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 82%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Data Governance</span>
+                                    <span class="text-sm font-medium text-gray-700">80%</span>
+                                </div>
+                                <div class="skill-bar-background">
+                                    <div class="skill-bar-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
