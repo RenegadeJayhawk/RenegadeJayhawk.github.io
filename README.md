@@ -26,12 +26,16 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 - **Certifications**: Clickable badges with verification links
 
 ### Interactive Elements
+- **Filterable Skills**: Real-time search and category filtering (All/AI/Tech) with smooth animations
+- **Animated KPI Counters**: Numbers animate from 0 to target value on scroll into view
+- **Interactive Project Cards**: Hover effects with detailed modal system featuring 8+ projects
+- **Timeline Zoom & Pan**: Zoom controls (50-200%) with mouse wheel and pan functionality
 - **Contact Form Modal**: Email integration with form validation
 - **Download Resume**: Print-optimized PDF generation
 - **Social Media Links**: LinkedIn, GitHub, and email with hover effects
 - **Expandable Timeline**: Show more/less functionality for detailed career history
 - **Skill Progress Bars**: Animated bars that trigger on scroll
-- **Project Cards**: Hover effects and visual feedback
+- **Project Details Modal**: Rich project information with features, tech stack, and impact metrics
 
 ### Performance & Analytics
 - **Google Analytics**: Track visitors and engagement (SPA-compatible)
@@ -46,12 +50,13 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 
 - **HTML5** - Semantic markup with SEO meta tags
 - **CSS3** - Custom styles with Tailwind CSS and CSS custom properties
-- **JavaScript** - Vanilla JS for SPA routing and interactivity
+- **JavaScript (ES6+)** - Vanilla JS for SPA routing, interactive elements, and animations
 - **Chart.js v4.4.0** - Animated data visualization
 - **Tailwind CSS v3** - Utility-first CSS framework (CDN)
 - **Font Awesome 6.4.0** - Icon library
 - **Google Fonts** - Inter font family
 - **Google Analytics** - Visitor tracking and engagement metrics
+- **Intersection Observer API** - Scroll-triggered animations for counters and charts
 
 ## 📂 Project Structure
 
@@ -77,12 +82,16 @@ Visit: [https://renegadejayhawk.github.io](https://renegadejayhawk.github.io)
 - **Color Palette**: Calm Harmony (Light Gray, Slate, Teal with dark mode variants)
 - **Typography**: Inter font family for modern readability
 - **Layout**: Card-based grid system for scannable content
-- **Animations**: 
+- **Animations**:
   - Page load fade-ins (0.6s)
   - Section transitions (0.5s)
   - Staggered child animations (0.1-0.5s delays)
   - Hover effects on all interactive elements
   - Skill bar animations triggered by scroll
+  - KPI counter animations (0 to target value)
+  - Skill tag fade-in animations
+  - Project modal slide-up animation
+  - Shimmer effects on version/date (8-second intervals)
 - **Visualizations**:
   - Horizontal bar chart for AI skills (Chart.js)
   - Visual timeline with company logos
@@ -139,6 +148,9 @@ git push origin main
 
 - Page views (SPA navigation)
 - Section views
+- Skill searches and filter selections
+- Project detail modal views
+- Timeline zoom interactions
 - Download resume clicks
 - Contact modal opens
 - Contact form submissions
