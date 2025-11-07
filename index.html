@@ -6,6 +6,7 @@
     <title>Brad Allen - AI Strategy & Engineering Leader</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -36,6 +37,14 @@
                         <option value="achievements">Key Achievements</option>
                         <option value="education-skills">Education & Skills</option>
                     </select>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="openContactModal()" class="hidden md:flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md font-medium transition-all">
+                        <i class="fas fa-envelope"></i> Contact
+                    </button>
+                    <button onclick="downloadResume()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md font-medium transition-all">
+                        <i class="fas fa-download"></i> <span class="hidden sm:inline">Download PDF</span>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -74,6 +83,18 @@
                         <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Responsible AI Practices</span>
                     </div>
                 </div>
+
+                <div class="mt-12 flex justify-center gap-6">
+                    <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="social-icon" title="Connect on LinkedIn" aria-label="Connect on LinkedIn">
+                        <i class="fab fa-linkedin text-3xl"></i>
+                    </a>
+                    <a href="https://github.com/RenegadeJayhawk" target="_blank" rel="noopener noreferrer" class="social-icon" title="View GitHub Profile" aria-label="View GitHub Profile">
+                        <i class="fab fa-github text-3xl"></i>
+                    </a>
+                    <a href="mailto:bradallen25010@frontier.com" class="social-icon" title="Send Email" aria-label="Send Email">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -99,6 +120,14 @@
                             <li>Presented a GenAI knowledge base proposal to the AI Council, showing potential 25-30% reduction in onboarding time.</li>
                             <li>Directed full-stack teams maintaining 99.9% SLA compliance.</li>
                         </ul>
+                        <div class="expandable-content mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-gray-600 mb-2"><strong>Key Technologies:</strong> Azure, .NET, GenAI APIs, Microsoft Teams Integration</p>
+                            <p class="text-gray-600"><strong>Team Size:</strong> Led cross-functional teams of 15+ developers and engineers</p>
+                        </div>
+                        <button onclick="toggleExpand(this)" class="mt-4 text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <span>Show more</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -110,6 +139,14 @@
                         <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
                             <li>Directed distributed Agile teams across multiple time zones, ensuring timely delivery of enterprise software.</li>
                         </ul>
+                        <div class="expandable-content mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-gray-600 mb-2"><strong>Key Technologies:</strong> Agile/Scrum, Jira, Confluence, Enterprise Architecture</p>
+                            <p class="text-gray-600"><strong>Clients:</strong> Fortune 500 financial services and healthcare organizations</p>
+                        </div>
+                        <button onclick="toggleExpand(this)" class="mt-4 text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <span>Show more</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -121,6 +158,14 @@
                         <ul class="mt-4 list-disc list-inside text-gray-700 space-y-2">
                             <li>Led PMO, QA, and Support organizations, formalizing project delivery processes and establishing company-wide development standards.</li>
                         </ul>
+                        <div class="expandable-content mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-gray-600 mb-2"><strong>Key Technologies:</strong> Cloud Infrastructure, DevOps, Quality Automation</p>
+                            <p class="text-gray-600"><strong>Impact:</strong> Reduced project delivery time by 30% through process optimization</p>
+                        </div>
+                        <button onclick="toggleExpand(this)" class="mt-4 text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <span>Show more</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -133,6 +178,14 @@
                             <li>Directed development of secure SaaS solutions for clients like AT&T, CenturyLink, and Honeywell.</li>
                             <li>Initiated the company's first security audit and VAPT program.</li>
                         </ul>
+                        <div class="expandable-content mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-gray-600 mb-2"><strong>Key Technologies:</strong> SaaS Architecture, Security Testing, Cloud Platforms</p>
+                            <p class="text-gray-600"><strong>Security Achievement:</strong> Implemented comprehensive VAPT program covering 100% of production systems</p>
+                        </div>
+                        <button onclick="toggleExpand(this)" class="mt-4 text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <span>Show more</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -146,6 +199,15 @@
                             <li>Pioneered the organization's first Agile initiative, leading to 338% ROI and $62M in cost savings.</li>
                             <li>Advised executive management on technology portfolios exceeding $40M in value.</li>
                         </ul>
+                        <div class="expandable-content mt-4 pt-4 border-t border-gray-200">
+                            <p class="text-gray-600 mb-2"><strong>Key Technologies:</strong> Enterprise Software Development, Agile Transformation, Portfolio Management</p>
+                            <p class="text-gray-600 mb-2"><strong>Notable Projects:</strong> Led digital transformation initiatives across defense and aerospace divisions</p>
+                            <p class="text-gray-600"><strong>Leadership:</strong> Mentored 50+ engineers and architects over 16-year tenure</p>
+                        </div>
+                        <button onclick="toggleExpand(this)" class="mt-4 text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <span>Show more</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -358,11 +420,75 @@
     </main>
 
     <footer class="bg-gray-800 text-white mt-16">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2025 Brad Allen. This is an interactive resume application.</p>
-            <p class="mt-2">Contact: bradallen25010@frontier.com | <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 underline">LinkedIn</a></p>
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Brad Allen</h3>
+                    <p class="text-gray-400">AI Strategy & Engineering Leader</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="social-icon-footer" title="Connect on LinkedIn" aria-label="Connect on LinkedIn">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="https://github.com/RenegadeJayhawk" target="_blank" rel="noopener noreferrer" class="social-icon-footer" title="View GitHub Profile" aria-label="View GitHub Profile">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="mailto:bradallen25010@frontier.com" class="social-icon-footer" title="Send Email" aria-label="Send Email">
+                            <i class="fas fa-envelope text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Get in Touch</h4>
+                    <button onclick="openContactModal()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md font-medium transition-all flex items-center gap-2">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </div>
+            </div>
+            <div class="text-center text-gray-400 border-t border-gray-700 pt-8">
+                <p>&copy; 2025 Brad Allen. This is an interactive resume application.</p>
+                <p class="mt-2">Contact: bradallen25010@frontier.com | <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 underline">LinkedIn</a></p>
+            </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Get in Touch</h2>
+                <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="mb-4">
+                    <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                    <input type="text" id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                    <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md font-medium transition-all">
+                        <i class="fas fa-paper-plane mr-2"></i> Send Message
+                    </button>
+                    <button type="button" onclick="closeContactModal()" class="px-6 py-3 border border-gray-300 rounded-md font-medium hover:bg-gray-50 transition-all">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>

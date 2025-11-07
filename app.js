@@ -67,11 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showSection(sectionId, element) {
-    document.querySelectorAll('[data-section]').forEach(section => {
+    const allSections = document.querySelectorAll('[data-section]');
+    const targetSection = document.querySelector(`[data-section="${sectionId}"]`);
+    
+    // Remove active class from all sections
+    allSections.forEach(section => {
         section.classList.remove('active');
     });
-    document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+    
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Add active class to target section
+        if (targetSection) {
+            targetSection.classList.add('active');
+        }
+    }, 50);
 
+    // Update navigation active states
     if (element) {
         if (element.tagName === 'SELECT') {
             const navLinks = document.querySelectorAll('.nav-link');
@@ -104,4 +119,79 @@ function wrapText(text, maxCharsPerLine) {
     });
     lines.push(currentLine.trim());
     return lines;
+}
+
+// Timeline Expand/Collapse
+function toggleExpand(button) {
+    const content = button.previousElementSibling;
+    const icon = button.querySelector('i');
+    const span = button.querySelector('span');
+    
+    if (content.classList.contains('expanded')) {
+        content.classList.remove('expanded');
+        icon.style.transform = 'rotate(0deg)';
+        span.textContent = 'Show more';
+    } else {
+        content.classList.add('expanded');
+        icon.style.transform = 'rotate(180deg)';
+        span.textContent = 'Show less';
+    }
+}
+
+// Contact Modal Functions
+function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('contactModal');
+    if (event.target === modal) {
+        closeContactModal();
+    }
+}
+
+// Handle Contact Form Submission
+function handleContactSubmit(event) {
+    event.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:bradallen25010@frontier.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    
+    // Open default email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    alert('Your default email client will open. Please send the message from there.');
+    
+    // Reset form and close modal
+    document.getElementById('contactForm').reset();
+    closeContactModal();
+}
+
+// Download Resume as PDF
+function downloadResume() {
+    // Option 1: Simple print dialog (user can save as PDF)
+    window.print();
+    
+    // Option 2: If you have a PDF file, use this instead:
+    // const link = document.createElement('a');
+    // link.href = 'brad-allen-resume.pdf';
+    // link.download = 'Brad-Allen-Resume.pdf';
+    // link.click();
 }
