@@ -163,19 +163,56 @@
                 </p>
 
                 <div class="mt-12">
-                    <h3 class="text-2xl font-bold text-slate-800 mb-6">Core Competencies</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">AI Leadership</span>
-                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">Generative AI Strategy</span>
-                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">Applied AI Innovation</span>
-                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">LLMs & NLP</span>
-                        <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-teal-200">AI Governance</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Full-Stack Architecture</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Secure SDLC</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Cloud & Data Systems</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Team Building</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Agile Delivery</span>
-                        <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-transform hover:scale-105 hover:bg-gray-200">Responsible AI Practices</span>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h3 class="text-2xl font-bold text-slate-800">Core Competencies</h3>
+                        <div class="flex items-center gap-4 w-full md:w-auto">
+                            <input type="text" 
+                                   id="skillSearch" 
+                                   placeholder="🔍 Search skills..." 
+                                   class="skill-search-input flex-1 md:flex-none px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                   oninput="filterSkills(this.value)"
+                                   aria-label="Search skills">
+                            <div class="flex gap-2">
+                                <button onclick="filterSkillsByCategory('all')" 
+                                        class="filter-btn active text-xs px-3 py-1 rounded-full font-medium transition-all"
+                                        data-category="all"
+                                        aria-label="Show all skills">
+                                    All
+                                </button>
+                                <button onclick="filterSkillsByCategory('ai')" 
+                                        class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition-all"
+                                        data-category="ai"
+                                        aria-label="Show AI skills only">
+                                    AI
+                                </button>
+                                <button onclick="filterSkillsByCategory('technical')" 
+                                        class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition-all"
+                                        data-category="technical"
+                                        aria-label="Show technical skills only">
+                                    Tech
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="skillsContainer" class="flex flex-wrap gap-3">
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="AI Leadership">AI Leadership</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="Generative AI Strategy">Generative AI Strategy</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="Applied AI Innovation">Applied AI Innovation</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="LLMs & NLP">LLMs & NLP</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="AI Governance">AI Governance</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="Prompt Engineering">Prompt Engineering</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="Machine Learning">Machine Learning</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="Full-Stack Architecture">Full-Stack Architecture</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="Secure SDLC">Secure SDLC</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="Cloud & Data Systems">Cloud & Data Systems</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="Team Building">Team Building</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="Agile Delivery">Agile Delivery</span>
+                        <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-gray-200 cursor-pointer" data-category="technical" data-skill="DevOps & CI/CD">DevOps & CI/CD</span>
+                        <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium transition-all hover:scale-105 hover:bg-teal-200 cursor-pointer" data-category="ai" data-skill="Responsible AI Practices">Responsible AI Practices</span>
+                    </div>
+                    <div id="noSkillsMessage" class="hidden text-center text-gray-500 py-8">
+                        <i class="fas fa-search text-4xl mb-2"></i>
+                        <p>No skills match your search</p>
                     </div>
                 </div>
 
@@ -196,11 +233,30 @@
         <!-- Section 2: Career Timeline -->
         <section data-section="timeline" aria-labelledby="timeline-heading">
             <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center" id="timeline-heading">Career Timeline</h2>
-            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+            <p class="text-lg text-gray-700 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
                 My career is built on a foundation of delivering complex software in demanding environments. This timeline shows my progression from hands-on technologist to senior leader, culminating in my current role driving AI adoption.
             </p>
+            
+            <!-- Timeline Controls -->
+            <div class="flex justify-center items-center gap-4 mb-8">
+                <button onclick="zoomTimeline('in')" class="timeline-control-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Zoom In" aria-label="Zoom in timeline">
+                    <i class="fas fa-search-plus"></i>
+                    <span class="hidden sm:inline">Zoom In</span>
+                </button>
+                <button onclick="zoomTimeline('out')" class="timeline-control-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Zoom Out" aria-label="Zoom out timeline">
+                    <i class="fas fa-search-minus"></i>
+                    <span class="hidden sm:inline">Zoom Out</span>
+                </button>
+                <button onclick="resetTimelineZoom()" class="timeline-control-btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Reset View" aria-label="Reset timeline view">
+                    <i class="fas fa-undo"></i>
+                    <span class="hidden sm:inline">Reset</span>
+                </button>
+                <div class="text-sm text-gray-600 ml-2">
+                    <span id="zoomLevel">100%</span>
+                </div>
+            </div>
 
-            <div class="relative max-w-4xl mx-auto">
+            <div id="timelineContainer" class="relative max-w-4xl mx-auto timeline-zoomable" style="transform-origin: center top;">
                 <div class="timeline-line hidden md:block"></div>
                 
                 <div class="timeline-item">
@@ -351,22 +407,92 @@
             <div class="bg-white shadow-lg rounded-lg p-8">
                 <h3 class="text-2xl font-bold text-slate-800 mb-6">AI & Innovation Projects (Hands-On)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
-                        <div class="project-thumbnail mb-4">
-                            <img src="https://via.placeholder.com/400x250/0d9488/ffffff?text=AI+Workflow" alt="AI-Driven Workflow Project" class="w-full h-48 object-cover rounded">
+                    <div class="interactive-project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-all hover:shadow-xl" data-project="workflow">
+                        <div class="project-thumbnail mb-4 relative overflow-hidden rounded-lg">
+                            <img src="https://via.placeholder.com/400x250/0d9488/ffffff?text=AI+Workflow" alt="AI-Driven Workflow Project" class="w-full h-48 object-cover rounded transition-transform duration-300">
+                            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end">
+                                <div class="p-4 text-white">
+                                    <p class="text-sm font-semibold">Click to view details</p>
+                                    <p class="text-xs">Interactive demo & architecture</p>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="text-lg font-semibold text-teal-700">AI-Driven Workflow & Security</h4>
-                        <p class="mt-2 text-gray-700">Prototyped an NLP Prompt Optimization Agent for Microsoft Teams and a Phishing Pre-Warning Email Scanner for early anomaly detection.</p>
-                    </div>
-                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
-                        <div class="project-thumbnail mb-4">
-                            <img src="https://via.placeholder.com/400x250/14b8a6/ffffff?text=Data+Aggregation" alt="Data Aggregation Project" class="w-full h-48 object-cover rounded">
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">AI-Driven Workflow & Security</h4>
+                        <p class="mt-2 text-gray-700 mb-4">Prototyped an NLP Prompt Optimization Agent for Microsoft Teams and a Phishing Pre-Warning Email Scanner for early anomaly detection.</p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">NLP</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Security</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Teams</span>
                         </div>
-                        <h4 class="text-lg font-semibold text-teal-700">Data Aggregation & Analysis</h4>
-                        <p class="mt-2 text-gray-700">Built a multi-source Shopping Aggregator (Craigslist, Facebook) and an automated Software Tools Comparison SPA for data-driven tech selection.</p>
+                        <button onclick="showProjectDetails('workflow')" class="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
                     </div>
-                    <div class="project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-transform hover:scale-105">
-                        <div class="project-thumbnail mb-4">
+                    <div class="interactive-project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-all hover:shadow-xl" data-project="aggregator">
+                        <div class="project-thumbnail mb-4 relative overflow-hidden rounded-lg">
+                            <img src="https://via.placeholder.com/400x250/14b8a6/ffffff?text=Data+Aggregation" alt="Data Aggregation Project" class="w-full h-48 object-cover rounded transition-transform duration-300">
+                            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end">
+                                <div class="p-4 text-white">
+                                    <p class="text-sm font-semibold">Click to view details</p>
+                                    <p class="text-xs">Architecture & results</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">Data Aggregation & Analysis</h4>
+                        <p class="mt-2 text-gray-700 mb-4">Built a multi-source Shopping Aggregator (Craigslist, Facebook) and an automated Software Tools Comparison SPA for data-driven tech selection.</p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Web Scraping</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">APIs</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">SPA</span>
+                        </div>
+                        <button onclick="showProjectDetails('aggregator')" class="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                    <div class="interactive-project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-all hover:shadow-xl" data-project="resume">
+                        <div class="project-thumbnail mb-4 relative overflow-hidden rounded-lg">
+                            <img src="https://via.placeholder.com/400x250/06b6d4/ffffff?text=Interactive+Resume" alt="Interactive Resume SPA" class="w-full h-48 object-cover rounded transition-transform duration-300">
+                            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end">
+                                <div class="p-4 text-white">
+                                    <p class="text-sm font-semibold">You're viewing it now!</p>
+                                    <p class="text-xs">Built with vanilla JS & Tailwind</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">Interactive Resume SPA</h4>
+                        <p class="mt-2 text-gray-700 mb-4">This very application! A modern, interactive single-page application showcasing animations, dark mode, accessibility, and mobile optimization.</p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Vanilla JS</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Tailwind</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">WCAG 2.1 AA</span>
+                        </div>
+                        <button onclick="showProjectDetails('resume')" class="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                    <div class="interactive-project-card bg-gray-50 p-6 rounded-lg shadow-inner transition-all hover:shadow-xl" data-project="automation">
+                        <div class="project-thumbnail mb-4 relative overflow-hidden rounded-lg">
+                            <img src="https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Automation+Tools" alt="Automation & Tooling Project" class="w-full h-48 object-cover rounded transition-transform duration-300">
+                            <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end">
+                                <div class="p-4 text-white">
+                                    <p class="text-sm font-semibold">Click to view details</p>
+                                    <p class="text-xs">DevOps & automation examples</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">Automation & Tooling</h4>
+                        <p class="mt-2 text-gray-700 mb-4">Developed custom CLI tools, automation scripts, and CI/CD pipelines to streamline development workflows and reduce manual overhead.</p>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Python</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Bash</span>
+                            <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">CI/CD</span>
+                        </div>
+                        <button onclick="showProjectDetails('automation')" class="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
                             <img src="https://via.placeholder.com/400x250/2dd4bf/ffffff?text=User-Facing+AI" alt="User-Facing AI Applications" class="w-full h-48 object-cover rounded">
                         </div>
                         <h4 class="text-lg font-semibold text-teal-700">User-Facing AI Applications</h4>
@@ -392,22 +518,22 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="kpi-card">
                     <div class="kpi-title">Cost Savings (Raytheon)</div>
-                    <div class="kpi-value">$62M</div>
+                    <div class="kpi-value" data-target="62" data-prefix="$" data-suffix="M">$0M</div>
                     <div class="kpi-context">From a single Agile initiative over five years.</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-title">Return on Investment (Raytheon)</div>
-                    <div class="kpi-value">338%</div>
+                    <div class="kpi-value" data-target="338" data-prefix="" data-suffix="%">0%</div>
                     <div class="kpi-context">On the organization's first-ever Agile project.</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-title">Portfolio Value (Raytheon)</div>
-                    <div class="kpi-value">$40M+</div>
+                    <div class="kpi-value" data-target="40" data-prefix="$" data-suffix="M+">$0M+</div>
                     <div class="kpi-context">Advised executive management on portfolios of this value.</div>
                 </div>
                  <div class="kpi-card">
                     <div class="kpi-title">System Availability (Hyundai)</div>
-                    <div class="kpi-value">99.9%</div>
+                    <div class="kpi-value" data-target="99.9" data-prefix="" data-suffix="%" data-decimals="1">0%</div>
                     <div class="kpi-context">Maintained SLA compliance for enterprise applications.</div>
                 </div>
             </div>
@@ -1363,6 +1489,23 @@
                     Major versions indicate significant content or feature additions, minor versions include enhancements, 
                     and patches represent bug fixes and minor updates.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+        <div class="project-modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800" id="project-modal-title">
+                    <i class="fas fa-project-diagram text-teal-600 mr-2"></i>
+                    <span id="projectTitle">Project Details</span>
+                </h2>
+                <button onclick="closeProjectModal()" class="text-gray-500 hover:text-gray-700 text-2xl" aria-label="Close project modal">&times;</button>
+            </div>
+            
+            <div id="projectContent">
+                <!-- Content will be dynamically inserted -->
             </div>
         </div>
     </div>

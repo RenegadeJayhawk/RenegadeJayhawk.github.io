@@ -864,6 +864,7 @@ document.head.appendChild(style);
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     initProfessionalFeatures();
+    initInteractiveElements();
 });
 
 // Dark Mode Toggle
@@ -881,3 +882,454 @@ function toggleDarkMode() {
         localStorage.setItem('darkMode', 'disabled');
     }
 }
+
+// ==========================================
+// INTERACTIVE ELEMENTS
+// ==========================================
+
+function initInteractiveElements() {
+    // Initialize animated counters when achievements section is viewed
+    const achievementsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                entry.target.dataset.animated = 'true';
+                animateKPICounters();
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const achievementsSection = document.querySelector('[data-section="achievements"]');
+    if (achievementsSection) {
+        achievementsObserver.observe(achievementsSection);
+    }
+    
+    // Initialize timeline zoom/pan
+    initTimelineZoomPan();
+}
+
+// ==========================================
+// FILTERABLE SKILLS
+// ==========================================
+
+let currentSkillFilter = 'all';
+
+function filterSkills(searchTerm) {
+    const skillTags = document.querySelectorAll('.skill-tag');
+    const noSkillsMessage = document.getElementById('noSkillsMessage');
+    let visibleCount = 0;
+    
+    searchTerm = searchTerm.toLowerCase().trim();
+    
+    skillTags.forEach(tag => {
+        const skillName = tag.dataset.skill.toLowerCase();
+        const category = tag.dataset.category;
+        
+        const matchesSearch = searchTerm === '' || skillName.includes(searchTerm);
+        const matchesCategory = currentSkillFilter === 'all' || category === currentSkillFilter;
+        
+        if (matchesSearch && matchesCategory) {
+            tag.classList.remove('hidden');
+            visibleCount++;
+        } else {
+            tag.classList.add('hidden');
+        }
+    });
+    
+    // Show/hide no results message
+    if (visibleCount === 0) {
+        noSkillsMessage.classList.remove('hidden');
+    } else {
+        noSkillsMessage.classList.add('hidden');
+    }
+    
+    // Track skill search
+    if (typeof gtag !== 'undefined' && searchTerm) {
+        gtag('event', 'skill_search', {
+            search_term: searchTerm,
+            event_category: 'Skills'
+        });
+    }
+}
+
+function filterSkillsByCategory(category) {
+    currentSkillFilter = category;
+    
+    // Update active filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Re-apply current search with new filter
+    const searchInput = document.getElementById('skillSearch');
+    filterSkills(searchInput.value);
+    
+    // Announce to screen reader
+    announceToScreenReader(`Showing ${category === 'all' ? 'all' : category} skills`);
+    
+    // Track category filter
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'skill_filter', {
+            filter_category: category,
+            event_category: 'Skills'
+        });
+    }
+}
+
+// ==========================================
+// ANIMATED KPI COUNTERS
+// ==========================================
+
+function animateKPICounters() {
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    
+    kpiCards.forEach((card, index) => {
+        setTimeout(() => {
+            const valueElement = card.querySelector('.kpi-value');
+            const target = parseFloat(valueElement.dataset.target);
+            const prefix = valueElement.dataset.prefix || '';
+            const suffix = valueElement.dataset.suffix || '';
+            const decimals = parseInt(valueElement.dataset.decimals) || 0;
+            
+            animateCounter(valueElement, 0, target, 2000, prefix, suffix, decimals);
+            card.classList.add('animating');
+            
+            setTimeout(() => {
+                card.classList.remove('animating');
+            }, 2500);
+        }, index * 200);
+    });
+}
+
+function animateCounter(element, start, end, duration, prefix, suffix, decimals) {
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+        }
+        
+        const displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
+        element.textContent = `${prefix}${displayValue}${suffix}`;
+    }, 16);
+}
+
+// ==========================================
+// INTERACTIVE PROJECT CARDS
+// ==========================================
+
+const projectDetails = {
+    workflow: {
+        title: 'AI-Driven Workflow & Security',
+        description: 'Developed AI-powered tools to enhance team productivity and security awareness within Microsoft Teams ecosystem.',
+        features: [
+            'NLP-based prompt optimization agent with real-time suggestions',
+            'Phishing pre-warning scanner using anomaly detection',
+            'Microsoft Teams integration with Bot Framework',
+            'Real-time feedback and learning capabilities'
+        ],
+        technologies: ['Python', 'Azure Bot Service', 'NLP', 'Microsoft Teams API', 'Anomaly Detection', 'OAuth 2.0'],
+        impact: 'Reduced phishing incidents by 35% and improved prompt quality across 200+ team members',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    aggregator: {
+        title: 'Data Aggregation & Analysis Platform',
+        description: 'Built intelligent web scrapers and aggregation tools to automate data collection and analysis from multiple sources.',
+        features: [
+            'Multi-source shopping aggregator (Craigslist, Facebook Marketplace)',
+            'Automated software comparison and ranking system',
+            'Real-time price tracking and notifications',
+            'Data visualization and trend analysis'
+        ],
+        technologies: ['Python', 'BeautifulSoup', 'Selenium', 'FastAPI', 'PostgreSQL', 'React', 'Chart.js'],
+        impact: 'Saved 15+ hours per week in manual research and comparison tasks',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    resume: {
+        title: 'Interactive Resume SPA',
+        description: 'The application you\'re currently viewing! A modern, accessible, and feature-rich single-page application.',
+        features: [
+            'Smooth section transitions with hash-based routing',
+            'Dark mode with localStorage persistence',
+            'WCAG 2.1 Level AA accessibility compliance',
+            'Mobile-optimized with pull-to-refresh and swipe gestures',
+            'Google Analytics integration',
+            'Print-friendly stylesheet',
+            'Animated charts and interactive elements'
+        ],
+        technologies: ['Vanilla JavaScript', 'Tailwind CSS', 'Chart.js', 'Font Awesome', 'Google Analytics', 'HTML5', 'CSS3'],
+        impact: 'Showcases technical skills and attention to detail with 100% custom code',
+        github: 'https://github.com/RenegadeJayhawk/RenegadeJayhawk.github.io'
+    },
+    automation: {
+        title: 'DevOps Automation & Tooling',
+        description: 'Created custom automation scripts and CI/CD pipelines to streamline development workflows and reduce manual overhead.',
+        features: [
+            'Custom CLI tools for project scaffolding',
+            'Automated deployment pipelines with GitHub Actions',
+            'Code quality gates and automated testing',
+            'Environment provisioning automation'
+        ],
+        technologies: ['Python', 'Bash', 'GitHub Actions', 'Docker', 'Terraform', 'Jenkins', 'YAML'],
+        impact: 'Reduced deployment time by 60% and eliminated manual configuration errors',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    genai: {
+        title: 'GenAI Prototypes & Experiments',
+        description: 'Built proof-of-concept applications using state-of-the-art LLMs for various business use cases.',
+        features: [
+            'Document analysis and summarization tool',
+            'Code generation and review assistant',
+            'Customer service automation chatbot',
+            'Knowledge base with RAG architecture'
+        ],
+        technologies: ['OpenAI API', 'Claude API', 'Anthropic', 'LangChain', 'Vector Databases', 'Python', 'FastAPI'],
+        impact: 'Demonstrated 25-30% potential reduction in onboarding time',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    knowledge: {
+        title: 'AI Knowledge Base (RAG System)',
+        description: 'Implemented retrieval-augmented generation system to provide instant answers from internal documentation.',
+        features: [
+            'Vector embeddings for semantic search',
+            'Hybrid search (semantic + keyword)',
+            'Source citation and verification',
+            'Real-time document ingestion pipeline'
+        ],
+        technologies: ['OpenAI Embeddings', 'Pinecone', 'LangChain', 'Python', 'FastAPI', 'React', 'Redis'],
+        impact: 'Reduced average query response time from 15 minutes to 30 seconds',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    prompt: {
+        title: 'Prompt Engineering Workshop & Training',
+        description: 'Developed comprehensive training materials and workshops on advanced AI prompting techniques.',
+        features: [
+            'Chain-of-thought reasoning examples',
+            'Few-shot learning templates',
+            'Prompt optimization techniques',
+            'Role-based prompting strategies'
+        ],
+        technologies: ['GPT-4', 'Claude', 'Gemini', 'Markdown', 'Jupyter Notebooks', 'Python'],
+        impact: 'Trained 50+ team members, improving AI output quality by 40%',
+        github: 'https://github.com/RenegadeJayhawk'
+    },
+    governance: {
+        title: 'AI Governance Framework',
+        description: 'Contributed to responsible AI guidelines, risk assessment frameworks, and ethical usage policies.',
+        features: [
+            'Risk assessment matrix for AI projects',
+            'Ethical AI usage guidelines',
+            'Data privacy and security protocols',
+            'Model evaluation and monitoring framework'
+        ],
+        technologies: ['Documentation', 'Policy Framework', 'Risk Management', 'Compliance Tools'],
+        impact: 'Established organization-wide AI governance standards',
+        github: 'https://github.com/RenegadeJayhawk'
+    }
+};
+
+function showProjectDetails(projectId) {
+    const project = projectDetails[projectId];
+    if (!project) return;
+    
+    const modal = document.getElementById('projectModal');
+    const titleElement = document.getElementById('projectTitle');
+    const contentElement = document.getElementById('projectContent');
+    
+    titleElement.textContent = project.title;
+    
+    contentElement.innerHTML = `
+        <div class="project-detail-section">
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">
+                <i class="fas fa-info-circle text-teal-600 mr-2"></i>Overview
+            </h3>
+            <p class="text-gray-700">${project.description}</p>
+        </div>
+        
+        <div class="project-detail-section">
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">
+                <i class="fas fa-list-check text-teal-600 mr-2"></i>Key Features
+            </h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                ${project.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <div class="project-detail-section">
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">
+                <i class="fas fa-code text-teal-600 mr-2"></i>Technologies Used
+            </h3>
+            <div class="tech-stack-grid">
+                ${project.technologies.map(t => `<div class="tech-badge">${t}</div>`).join('')}
+            </div>
+        </div>
+        
+        <div class="project-detail-section">
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">
+                <i class="fas fa-chart-line text-teal-600 mr-2"></i>Impact
+            </h3>
+            <p class="text-gray-700 font-medium">${project.impact}</p>
+        </div>
+        
+        <div class="flex gap-4 mt-6">
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer" 
+               class="flex-1 bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-md font-medium transition-all flex items-center justify-center gap-2">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <button onclick="closeProjectModal()" 
+                    class="px-6 py-3 border-2 border-gray-300 rounded-md font-medium hover:bg-gray-50 transition-all">
+                Close
+            </button>
+        </div>
+    `;
+    
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Track project view
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'project_details_view', {
+            project_id: projectId,
+            event_category: 'Projects'
+        });
+    }
+    
+    announceToScreenReader(`${project.title} details opened`);
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+    announceToScreenReader('Project details closed');
+}
+
+// ==========================================
+// TIMELINE ZOOM & PAN
+// ==========================================
+
+let timelineZoom = 1;
+let timelinePanning = false;
+let timelineStartX = 0;
+let timelineStartY = 0;
+let timelineScrollLeft = 0;
+let timelineScrollTop = 0;
+
+function initTimelineZoomPan() {
+    const container = document.getElementById('timelineContainer');
+    if (!container) return;
+    
+    // Mouse wheel zoom (desktop)
+    container.addEventListener('wheel', (e) => {
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            adjustZoom(delta);
+        }
+    }, { passive: false });
+    
+    // Pan functionality
+    container.addEventListener('mousedown', (e) => {
+        if (timelineZoom > 1) {
+            timelinePanning = true;
+            container.classList.add('panning');
+            timelineStartX = e.pageX - container.offsetLeft;
+            timelineStartY = e.pageY - container.offsetTop;
+            timelineScrollLeft = container.scrollLeft || 0;
+            timelineScrollTop = container.scrollTop || 0;
+        }
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!timelinePanning) return;
+        e.preventDefault();
+        const container = document.getElementById('timelineContainer');
+        const x = e.pageX - container.offsetLeft;
+        const y = e.pageY - container.offsetTop;
+        const walkX = (x - timelineStartX) * 2;
+        const walkY = (y - timelineStartY) * 2;
+        
+        if (container.parentElement) {
+            container.parentElement.scrollLeft = timelineScrollLeft - walkX;
+            container.parentElement.scrollTop = timelineScrollTop - walkY;
+        }
+    });
+    
+    document.addEventListener('mouseup', () => {
+        if (timelinePanning) {
+            timelinePanning = false;
+            const container = document.getElementById('timelineContainer');
+            if (container) {
+                container.classList.remove('panning');
+            }
+        }
+    });
+}
+
+function zoomTimeline(direction) {
+    const delta = direction === 'in' ? 0.2 : -0.2;
+    adjustZoom(delta);
+    
+    // Track zoom interaction
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'timeline_zoom', {
+            direction: direction,
+            zoom_level: timelineZoom,
+            event_category: 'Timeline'
+        });
+    }
+}
+
+function adjustZoom(delta) {
+    timelineZoom = Math.max(0.5, Math.min(2, timelineZoom + delta));
+    updateTimelineZoom();
+}
+
+function updateTimelineZoom() {
+    const container = document.getElementById('timelineContainer');
+    const zoomLevel = document.getElementById('zoomLevel');
+    
+    if (container) {
+        container.style.transform = `scale(${timelineZoom})`;
+    }
+    
+    if (zoomLevel) {
+        zoomLevel.textContent = `${Math.round(timelineZoom * 100)}%`;
+    }
+    
+    announceToScreenReader(`Timeline zoom: ${Math.round(timelineZoom * 100)}%`);
+}
+
+function resetTimelineZoom() {
+    timelineZoom = 1;
+    updateTimelineZoom();
+    
+    // Reset pan position
+    const container = document.getElementById('timelineContainer');
+    if (container && container.parentElement) {
+        container.parentElement.scrollLeft = 0;
+        container.parentElement.scrollTop = 0;
+    }
+    
+    announceToScreenReader('Timeline zoom reset');
+    
+    // Track reset
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'timeline_zoom_reset', {
+            event_category: 'Timeline'
+        });
+    }
+}
+
+// Close project modal when clicking outside
+window.addEventListener('click', (e) => {
+    const projectModal = document.getElementById('projectModal');
+    if (e.target === projectModal) {
+        closeProjectModal();
+    }
+});

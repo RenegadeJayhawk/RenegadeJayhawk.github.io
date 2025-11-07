@@ -1374,6 +1374,332 @@ body.dark-mode #changelogModal .changelog-content::-webkit-scrollbar-thumb {
     }
 }
 
+/* ==========================================
+   INTERACTIVE ELEMENTS
+   ========================================== */
+
+/* Filterable Skills */
+.skill-search-input {
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+.skill-search-input:focus {
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+}
+
+body.dark-mode .skill-search-input {
+    background-color: #374151;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.filter-btn {
+    background-color: #e5e7eb;
+    color: #4b5563;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.filter-btn:hover {
+    background-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background-color: #0d9488;
+    color: white;
+    border-color: #0d9488;
+}
+
+body.dark-mode .filter-btn {
+    background-color: #374151;
+    color: #d1d5db;
+}
+
+body.dark-mode .filter-btn.active {
+    background-color: #14b8a6;
+    color: white;
+}
+
+.skill-tag {
+    animation: fadeInScale 0.3s ease-out;
+    cursor: pointer;
+}
+
+.skill-tag.hidden {
+    display: none;
+}
+
+.skill-tag:active {
+    transform: scale(0.95);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#noSkillsMessage {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Animated KPI Counters */
+.kpi-value {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}
+
+.kpi-card.animating .kpi-value {
+    animation: countPulse 0.5s ease-out;
+}
+
+@keyframes countPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+        color: #14b8a6;
+    }
+}
+
+/* Interactive Project Cards */
+.interactive-project-card {
+    cursor: pointer;
+    position: relative;
+}
+
+.interactive-project-card:hover {
+    transform: translateY(-5px);
+}
+
+.interactive-project-card:hover .project-thumbnail img {
+    transform: scale(1.1);
+}
+
+.interactive-project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-overlay {
+    pointer-events: none;
+}
+
+.interactive-project-card:active {
+    transform: translateY(-3px);
+}
+
+body.dark-mode .interactive-project-card {
+    background-color: #374151;
+}
+
+body.dark-mode .project-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+/* Project Modal */
+.project-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+}
+
+.project-modal.show {
+    display: flex;
+}
+
+.project-modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 56rem;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.project-detail-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.project-detail-section:last-child {
+    border-bottom: none;
+}
+
+.project-detail-section h3 {
+    display: flex;
+    align-items: center;
+}
+
+.project-detail-section ul li {
+    margin-left: 1.5rem;
+    padding-left: 0.5rem;
+}
+
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.tech-badge {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.tech-badge:hover {
+    transform: translateY(-2px);
+}
+
+/* Dark mode for project modal */
+body.dark-mode .project-modal-content {
+    background-color: #1e293b;
+}
+
+body.dark-mode .project-detail-section {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .project-detail-section h3 {
+    color: #e2e8f0;
+}
+
+body.dark-mode .project-detail-section p,
+body.dark-mode .project-detail-section li {
+    color: #cbd5e1;
+}
+
+/* Timeline Controls */body.dark-mode .project-detail-section {
+    border-bottom-color: #374151;
+}
+
+/* Timeline Zoom Controls */
+.timeline-control-btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-control-btn:active {
+    transform: scale(0.95);
+}
+
+.timeline-zoomable {
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+}
+
+#zoomLevel {
+    min-width: 50px;
+    font-weight: 600;
+    color: #0d9488;
+}
+
+body.dark-mode #zoomLevel {
+    color: #14b8a6;
+}
+
+/* Pan functionality */
+.timeline-zoomable.panning {
+    cursor: grabbing;
+}
+
+.timeline-zoomable:not(.panning) {
+    cursor: grab;
+}
+
+/* Smooth animations for timeline */
+.timeline-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mobile responsive for interactive elements */
+@media (max-width: 768px) {
+    .skill-search-input {
+        min-width: 150px;
+        font-size: 14px;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .timeline-control-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .timeline-control-btn span {
+        display: none;
+    }
+    
+    .tech-stack-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .tech-badge {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .project-modal-content {
+        max-height: 70vh;
+    }
+}
+
+/* Accessibility for interactive elements */
+.skill-tag:focus,
+.filter-btn:focus,
+.timeline-control-btn:focus,
+.interactive-project-card:focus {
+    outline: 3px solid #0d9488;
+    outline-offset: 2px;
+}
+
+body.dark-mode .skill-tag:focus,
+body.dark-mode .filter-btn:focus,
+body.dark-mode .timeline-control-btn:focus,
+body.dark-mode .interactive-project-card:focus {
+    outline-color: #14b8a6;
+}
+
 /* Optimize images for mobile */
 @media (max-width: 768px) {
     img {
