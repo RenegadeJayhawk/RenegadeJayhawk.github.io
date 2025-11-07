@@ -1325,20 +1325,20 @@ body.dark-mode #changelogModal .changelog-content::-webkit-scrollbar-thumb {
     background: #14b8a6;
 }
 
-/* Last Updated Shimmer Effect - runs once every 3 seconds */
+/* Last Updated Shimmer Effect - runs once every 8 seconds */
 @keyframes shimmer {
-    0%, 33.33% {
+    0%, 12.5% {
         transform: translateX(-100%);
         opacity: 0;
     }
-    33.34% {
+    12.51% {
         opacity: 1;
     }
-    66.66% {
+    25% {
         transform: translateX(200%);
         opacity: 1;
     }
-    66.67%, 100% {
+    25.01%, 100% {
         transform: translateX(200%);
         opacity: 0;
     }
@@ -1363,7 +1363,7 @@ body.dark-mode #changelogModal .changelog-content::-webkit-scrollbar-thumb {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.4), transparent);
-    animation: shimmer 3s ease-in-out infinite;
+    animation: shimmer 8s ease-in-out infinite;
     pointer-events: none;
 }
 
