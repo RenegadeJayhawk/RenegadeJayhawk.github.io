@@ -45,9 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }]
     };
     
-    const ctx = document.getElementById('aiSkillsChart');
-    if(ctx) {
-        new Chart(ctx, {
+    // Initialize chart with loading state
+    const chartCanvas = document.getElementById('aiSkillsChart');
+    const loadingState = document.getElementById('chartLoadingState');
+    const chartContainer = chartCanvas ? chartCanvas.parentElement : null;
+    
+    const initializeChart = () => {
+        if (typeof Chart === 'undefined') {
+            setTimeout(initializeChart, 100);
+            return;
+        }
+        
+        if(chartCanvas) {
+            const ctx = chartCanvas.getContext('2d');
+            new Chart(ctx, {
             type: 'bar',
             data: aiSkillsData,
             options: {
@@ -89,8 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }
+            
+            // Hide loading state and show chart
+            setTimeout(() => {
+                if (loadingState) loadingState.style.display = 'none';
+                if (chartContainer) chartContainer.style.display = 'block';
+            }, 300);
+        }
+    };
+    
+    initializeChart();
 });
+
+// Track section views in analytics
+function trackSectionView(sectionName) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'section_view', {
+            section_name: sectionName,
+            event_category: 'Navigation'
+        });
+    }
+}
 
 function showSection(sectionId, element) {
     const allSections = document.querySelectorAll('[data-section]');
@@ -109,6 +139,7 @@ function showSection(sectionId, element) {
         // Add active class to target section
         if (targetSection) {
             targetSection.classList.add('active');
+            trackSectionView(sectionId);
         }
     }, 50);
 
@@ -169,6 +200,13 @@ function openContactModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
+    
+    // Track modal open
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'contact_modal_open', {
+            event_category: 'Engagement'
+        });
+    }
 }
 
 function closeContactModal() {
@@ -188,6 +226,14 @@ window.onclick = function(event) {
 // Handle Contact Form Submission
 function handleContactSubmit(event) {
     event.preventDefault();
+    
+    // Track form submission
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'contact_form_submit', {
+            event_category: 'Engagement',
+            event_label: 'Contact Form'
+        });
+    }
     
     const formData = {
         name: document.getElementById('name').value,
@@ -212,6 +258,14 @@ function handleContactSubmit(event) {
 
 // Download Resume as PDF
 function downloadResume() {
+    // Track download event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'download_resume', {
+            event_category: 'Engagement',
+            event_label: 'PDF Download'
+        });
+    }
+    
     // Option 1: Simple print dialog (user can save as PDF)
     window.print();
     

@@ -508,3 +508,348 @@ body.dark-mode .kpi-title {
 body.dark-mode .kpi-context {
     color: var(--text-secondary);
 }
+
+/* Testimonial Cards */
+.testimonial-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Certification Badges */
+.certification-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #f0fdfa;
+    border: 1px solid #14b8a6;
+    border-radius: 0.5rem;
+    color: #0d9488;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.certification-badge:hover {
+    background-color: #0d9488;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(13, 148, 136, 0.3);
+}
+
+body.dark-mode .certification-badge {
+    background-color: rgba(13, 148, 136, 0.1);
+    border-color: #0d9488;
+}
+
+body.dark-mode .certification-badge:hover {
+    background-color: #0d9488;
+    color: white;
+}
+
+/* Speaking Engagements */
+.speaking-item {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.speaking-item:hover {
+    transform: translateX(5px);
+}
+
+/* Article Cards */
+.article-card {
+    transition: all 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Repository Cards */
+.repo-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.repo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.repo-card:hover::before {
+    left: 100%;
+}
+
+.repo-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Stat Boxes */
+.stat-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* GitHub Contribution Chart */
+body.dark-mode img[alt*="Contribution Chart"] {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Dark mode adjustments for new sections */
+body.dark-mode .article-card,
+body.dark-mode .repo-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .speaking-item:hover {
+    background-color: #374151;
+}
+
+body.dark-mode .stat-box {
+    background-color: #374151;
+}
+
+/* ==========================================
+   LOADING STATES
+   ========================================== */
+
+.chart-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.loader {
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #0d9488;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+body.dark-mode .loader {
+    border: 4px solid #374151;
+    border-top: 4px solid #14b8a6;
+}
+
+body.dark-mode .chart-loading p {
+    color: var(--text-secondary);
+}
+
+/* ==========================================
+   PRINT STYLESHEET (Enhanced)
+   ========================================== */
+
+@media print {
+    /* Hide non-printable elements */
+    header nav,
+    .social-links,
+    #darkModeToggle,
+    button,
+    .contact-modal,
+    .hover\:scale-105,
+    footer .social-links,
+    [onclick*="downloadResume"],
+    [onclick*="openContactModal"],
+    .speaking-item .bg-teal-100,
+    .article-card .text-teal-600,
+    .repo-card .text-teal-600 {
+        display: none !important;
+    }
+    
+    /* Show all sections for print */
+    section[data-section] {
+        display: block !important;
+        page-break-inside: avoid;
+        page-break-after: auto;
+        margin-bottom: 2rem;
+    }
+    
+    /* Optimize layout for print */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Reset colors for print */
+    h1, h2, h3, h4, h5, h6 {
+        color: black !important;
+        page-break-after: avoid;
+    }
+    
+    /* Optimize cards and sections */
+    .shadow-lg,
+    .shadow-md,
+    .bg-white,
+    .bg-gray-50 {
+        box-shadow: none !important;
+        background: white !important;
+        border: 1px solid #e5e7eb !important;
+    }
+    
+    /* Timeline adjustments */
+    .timeline-dot {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .timeline-dot img {
+        display: none;
+    }
+    
+    .timeline-dot::after {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        background: black;
+        border-radius: 50%;
+        margin: 9px auto;
+    }
+    
+    /* Grid adjustments */
+    .grid {
+        display: block !important;
+    }
+    
+    .grid > * {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+    
+    /* Chart optimization */
+    #skillsChart {
+        max-height: 300px !important;
+    }
+    
+    /* Hide loading states in print */
+    .chart-loading {
+        display: none !important;
+    }
+    
+    canvas#skillsChart {
+        display: block !important;
+    }
+    
+    /* Links should show URLs */
+    a[href^="http"]:not([href*="javascript"]):after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    /* Optimize profile photo */
+    img[alt*="Profile"],
+    img[alt*="profile"] {
+        max-width: 150px !important;
+        height: auto !important;
+    }
+    
+    /* Skill bars */
+    .skill-bar-fill {
+        background: linear-gradient(90deg, #0d9488, #14b8a6) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* Testimonials */
+    .testimonial-card {
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+    
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* Page margins */
+    @page {
+        margin: 0.5in;
+        size: letter;
+    }
+    
+    /* Footer */
+    footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 2px solid #000;
+    }
+    
+    /* Remove animations and transitions */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Use GPU acceleration for animations */
+.timeline-item,
+.project-card,
+.achievement-card,
+.testimonial-card,
+.article-card,
+.repo-card {
+    will-change: transform;
+}
+
+/* Optimize font rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Lazy load images - add loading attribute to img tags */
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

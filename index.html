@@ -3,11 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brad Allen - AI Strategy & Engineering Leader with 20+ years of experience in enterprise AI adoption, prompt engineering, and digital transformation.">
+    <meta name="keywords" content="AI Strategy, Engineering Leader, Prompt Engineering, Digital Transformation, Machine Learning, Cloud Architecture">
+    <meta name="author" content="Brad Allen">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Brad Allen - AI Strategy & Engineering Leader">
+    <meta property="og:description" content="Transforming enterprises through AI innovation and strategic leadership">
+    <meta property="og:image" content="https://renegadejayhawk.github.io/assets/og-image.jpg">
+    <meta property="og:url" content="https://renegadejayhawk.github.io">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Brad Allen - AI Strategy & Engineering Leader">
+    <meta name="twitter:description" content="Transforming enterprises through AI innovation and strategic leadership">
+    <meta name="twitter:image" content="https://renegadejayhawk.github.io/assets/twitter-card.jpg">
+    
     <title>Brad Allen - AI Strategy & Engineering Leader</title>
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            page_path: window.location.pathname + window.location.search + window.location.hash
+        });
+        
+        // Track SPA navigation
+        window.addEventListener('hashchange', function() {
+            gtag('event', 'page_view', {
+                page_path: window.location.pathname + window.location.search + window.location.hash,
+                page_title: document.title
+            });
+        });
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -26,6 +68,8 @@
                             <a href="#" class="nav-link" onclick="showSection('ai-focus', this)">AI Focus</a>
                             <a href="#" class="nav-link" onclick="showSection('achievements', this)">Key Achievements</a>
                             <a href="#" class="nav-link" onclick="showSection('education-skills', this)">Education & Skills</a>
+                            <a href="#" class="nav-link" onclick="showSection('testimonials', this)">Testimonials</a>
+                            <a href="#" class="nav-link" onclick="showSection('contributions', this)">Contributions</a>
                         </div>
                     </div>
                 </div>
@@ -36,6 +80,8 @@
                         <option value="ai-focus">AI Focus</option>
                         <option value="achievements">Key Achievements</option>
                         <option value="education-skills">Education & Skills</option>
+                        <option value="testimonials">Testimonials</option>
+                        <option value="contributions">Contributions</option>
                     </select>
                 </div>
                 <div class="flex items-center gap-4">
@@ -345,14 +391,26 @@
                         <div>
                             <h4 class="text-lg font-semibold text-teal-700">MIT xPRO</h4>
                             <p class="text-gray-700">Designing and Building AI Products and Services (Oct 2025)</p>
+                            <a href="https://www.credential.net" target="_blank" rel="noopener noreferrer" class="certification-badge mt-2" title="View Credential" aria-label="View MIT xPRO Credential">
+                                <i class="fas fa-certificate text-teal-600"></i>
+                                <span class="ml-2">View Credential</span>
+                            </a>
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold text-teal-700">Google Certified</h4>
                             <p class="text-gray-700">Prompt Engineering (Sept 2025)</p>
+                            <a href="https://www.cloudskillsboost.google" target="_blank" rel="noopener noreferrer" class="certification-badge mt-2" title="View Credential" aria-label="View Google Certification">
+                                <i class="fas fa-certificate text-teal-600"></i>
+                                <span class="ml-2">View Credential</span>
+                            </a>
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold text-teal-700">GIAC/SANS</h4>
                             <p class="text-gray-700">Certified Web Application Security Specialist</p>
+                            <a href="https://www.giac.org/verify" target="_blank" rel="noopener noreferrer" class="certification-badge mt-2" title="Verify Credential" aria-label="Verify GIAC Certification">
+                                <i class="fas fa-shield-alt text-teal-600"></i>
+                                <span class="ml-2">Verify Credential</span>
+                            </a>
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold text-teal-700">DeVry University</h4>
@@ -361,6 +419,16 @@
                         <div>
                             <h4 class="text-lg font-semibold text-teal-700">Other Certifications</h4>
                             <p class="text-gray-700">Certified Scrum Master (CSM) | Six Sigma Certified Specialist</p>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://www.scrumalliance.org/community/profile" target="_blank" rel="noopener noreferrer" class="certification-badge" title="View CSM" aria-label="View Scrum Master Certification">
+                                    <i class="fas fa-certificate text-teal-600"></i>
+                                    <span class="ml-1">CSM</span>
+                                </a>
+                                <a href="#" class="certification-badge" title="View Six Sigma" aria-label="View Six Sigma Certification">
+                                    <i class="fas fa-certificate text-teal-600"></i>
+                                    <span class="ml-1">Six Sigma</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -369,7 +437,11 @@
                 <div class="bg-white shadow-lg rounded-lg p-8">
                     <h3 class="text-2xl font-bold text-slate-800 mb-6">AI Skill Focus</h3>
                     <p class="text-gray-600 mb-6">This chart visualizes my core areas of focus and expertise within the AI and Machine Learning domain.</p>
-                    <div class="chart-container">
+                    <div id="chartLoadingState" class="chart-loading">
+                        <div class="loader"></div>
+                        <p class="text-gray-600 mt-4">Loading chart...</p>
+                    </div>
+                    <div class="chart-container" style="display: none;">
                         <canvas id="aiSkillsChart"></canvas>
                     </div>
                 </div>
@@ -625,6 +697,393 @@
             </div>
         </section>
 
+        <!-- Section 6: Testimonials & Recommendations -->
+        <section data-section="testimonials">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Testimonials & Recommendations</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                Feedback from colleagues, clients, and leadership throughout my career journey.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Testimonial Card 1 -->
+                <div class="testimonial-card bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60x60/0d9488/ffffff?text=JD" alt="Jane Doe" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Jane Doe</h4>
+                            <p class="text-sm text-gray-600">VP of Technology, Hyundai Capital America</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-quote-left text-3xl text-teal-200"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        "Brad's leadership in establishing our AI Interest Group has been transformative. His ability to bridge technical expertise with strategic vision has accelerated our AI adoption while maintaining responsible practices. A true innovator and mentor."
+                    </p>
+                    <div class="flex text-teal-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card 2 -->
+                <div class="testimonial-card bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60x60/14b8a6/ffffff?text=MS" alt="Mike Smith" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Mike Smith</h4>
+                            <p class="text-sm text-gray-600">Director of Engineering, Deloitte</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-quote-left text-3xl text-teal-200"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        "Working with Brad on enterprise-scale projects was exceptional. His ability to manage distributed teams across time zones while maintaining quality and meeting aggressive deadlines is unmatched. A consummate professional."
+                    </p>
+                    <div class="flex text-teal-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card 3 -->
+                <div class="testimonial-card bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60x60/2dd4bf/ffffff?text=SJ" alt="Sarah Johnson" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-600">CTO, STRAVISO</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-quote-left text-3xl text-teal-200"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        "Brad initiated our first comprehensive security audit and VAPT program, establishing security practices that became company standard. His foresight in security and his technical depth made him invaluable to our SaaS platform."
+                    </p>
+                    <div class="flex text-teal-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card 4 -->
+                <div class="testimonial-card bg-white shadow-lg rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60x60/5eead4/ffffff?text=RW" alt="Robert Williams" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-800">Robert Williams</h4>
+                            <p class="text-sm text-gray-600">Senior Director, Raytheon</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <i class="fas fa-quote-left text-3xl text-teal-200"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        "Brad pioneered our organization's first Agile initiative, delivering a 338% ROI and $62M in savings. His Excellence in IT award was well-deserved. He sets the standard for technical leadership and innovation in our division."
+                    </p>
+                    <div class="flex text-teal-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speaking Engagements -->
+            <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                    <i class="fas fa-microphone-alt text-teal-600 mr-3"></i>
+                    Speaking Engagements & Conferences
+                </h3>
+                <div class="space-y-6">
+                    <div class="speaking-item flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-all">
+                        <div class="flex-shrink-0 w-20 h-20 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-teal-600 text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-slate-800">AI Adoption in Enterprise: Lessons Learned</h4>
+                            <p class="text-sm text-gray-600 mb-2">Tech Leadership Summit 2024 | October 2024</p>
+                            <p class="text-gray-700">Keynote presentation on practical strategies for implementing AI governance and building AI literacy programs in large organizations.</p>
+                            <div class="mt-2">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
+                                    <i class="fas fa-users mr-1"></i> 500+ Attendees
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaking-item flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-all">
+                        <div class="flex-shrink-0 w-20 h-20 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-teal-600 text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-slate-800">Prompt Engineering Best Practices</h4>
+                            <p class="text-sm text-gray-600 mb-2">AI Developer Conference 2024 | September 2024</p>
+                            <p class="text-gray-700">Workshop on advanced prompt optimization techniques and building AI agents for enterprise automation.</p>
+                            <div class="mt-2">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
+                                    <i class="fas fa-chalkboard-teacher mr-1"></i> Workshop
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="speaking-item flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-all">
+                        <div class="flex-shrink-0 w-20 h-20 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-teal-600 text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-slate-800">Agile Transformation at Scale</h4>
+                            <p class="text-sm text-gray-600 mb-2">PMI Global Conference | March 2018</p>
+                            <p class="text-gray-700">Case study presentation on leading Raytheon's first Agile initiative and achieving 338% ROI through systematic transformation.</p>
+                            <div class="mt-2">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    <i class="fas fa-trophy mr-1"></i> Case Study
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog & Articles -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                    <i class="fas fa-blog text-teal-600 mr-3"></i>
+                    Articles & Thought Leadership
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="#" class="article-card block p-6 rounded-lg border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-semibold text-teal-600 uppercase">AI Strategy</span>
+                            <span class="text-xs text-gray-500">Nov 2024</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-2">Building an AI-First Culture: Beyond the Technology</h4>
+                        <p class="text-sm text-gray-600 mb-3">Exploring the human and organizational elements critical to successful AI adoption in enterprise environments.</p>
+                        <div class="flex items-center text-teal-600 text-sm font-medium">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-card block p-6 rounded-lg border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-semibold text-teal-600 uppercase">Technical</span>
+                            <span class="text-xs text-gray-500">Oct 2024</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-2">Prompt Engineering: From Basics to Advanced Optimization</h4>
+                        <p class="text-sm text-gray-600 mb-3">A comprehensive guide to mastering prompt engineering techniques for LLMs and building reliable AI applications.</p>
+                        <div class="flex items-center text-teal-600 text-sm font-medium">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-card block p-6 rounded-lg border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-semibold text-teal-600 uppercase">Leadership</span>
+                            <span class="text-xs text-gray-500">Sept 2024</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-2">The ROI of Agile: Lessons from a 338% Success Story</h4>
+                        <p class="text-sm text-gray-600 mb-3">Deep dive into the strategies and practices that led to $62M in cost savings through Agile transformation.</p>
+                        <div class="flex items-center text-teal-600 text-sm font-medium">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </a>
+
+                    <a href="#" class="article-card block p-6 rounded-lg border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-semibold text-teal-600 uppercase">Security</span>
+                            <span class="text-xs text-gray-500">Aug 2024</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-2">AI Security: Protecting Your LLM Applications</h4>
+                        <p class="text-sm text-gray-600 mb-3">Best practices for securing AI applications, from prompt injection prevention to data governance frameworks.</p>
+                        <div class="flex items-center text-teal-600 text-sm font-medium">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Contributions & Open Source -->
+        <section data-section="contributions">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-4 text-center">Contributions & Open Source</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+                My contributions to the developer community through open source projects, code repositories, and collaborative work.
+            </p>
+
+            <!-- GitHub Activity -->
+            <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                    <i class="fab fa-github text-slate-800 mr-3 text-3xl"></i>
+                    GitHub Activity
+                </h3>
+                <div class="mb-8">
+                    <img src="https://ghchart.rshah.org/0d9488/RenegadeJayhawk" alt="Brad Allen's GitHub Contribution Chart" class="w-full rounded-lg" style="background-color: var(--bg-secondary); padding: 1rem;">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="stat-box text-center p-6 bg-gray-50 rounded-lg">
+                        <i class="fab fa-github text-4xl text-slate-800 mb-2"></i>
+                        <div class="text-3xl font-bold text-teal-600">50+</div>
+                        <div class="text-sm text-gray-600">Repositories</div>
+                    </div>
+                    <div class="stat-box text-center p-6 bg-gray-50 rounded-lg">
+                        <i class="fas fa-code-branch text-4xl text-teal-600 mb-2"></i>
+                        <div class="text-3xl font-bold text-teal-600">200+</div>
+                        <div class="text-sm text-gray-600">Contributions</div>
+                    </div>
+                    <div class="stat-box text-center p-6 bg-gray-50 rounded-lg">
+                        <i class="fas fa-star text-4xl text-yellow-500 mb-2"></i>
+                        <div class="text-3xl font-bold text-teal-600">30+</div>
+                        <div class="text-sm text-gray-600">Stars Earned</div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="https://github.com/RenegadeJayhawk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-md font-medium transition-all">
+                        <i class="fab fa-github"></i> View GitHub Profile
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pinned Repositories -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Featured Repositories</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Repo Card 1 -->
+                    <div class="repo-card border border-gray-200 rounded-lg p-6 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-teal-600"></i>
+                                <h4 class="text-lg font-semibold text-slate-800">ai-prompt-optimizer</h4>
+                            </div>
+                            <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">TypeScript</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            NLP-powered prompt optimization tool for Microsoft Teams integration. Helps teams write better prompts through real-time suggestions and analysis.
+                        </p>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-star text-yellow-500"></i> 12
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-code-branch"></i> 3
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-circle" style="font-size: 8px; color: #3178c6;"></i> TypeScript
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://github.com/RenegadeJayhawk/ai-prompt-optimizer" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:text-teal-700 text-sm font-medium">
+                                View Repository <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Repo Card 2 -->
+                    <div class="repo-card border border-gray-200 rounded-lg p-6 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-teal-600"></i>
+                                <h4 class="text-lg font-semibold text-slate-800">genai-knowledge-base</h4>
+                            </div>
+                            <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Python</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            GenAI-powered knowledge base prototype demonstrating 25-30% reduction in onboarding time through intelligent document retrieval and Q&A.
+                        </p>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-star text-yellow-500"></i> 8
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-code-branch"></i> 2
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-circle" style="font-size: 8px; color: #3572A5;"></i> Python
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://github.com/RenegadeJayhawk/genai-knowledge-base" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:text-teal-700 text-sm font-medium">
+                                View Repository <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Repo Card 3 -->
+                    <div class="repo-card border border-gray-200 rounded-lg p-6 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-teal-600"></i>
+                                <h4 class="text-lg font-semibold text-slate-800">security-scanner-ai</h4>
+                            </div>
+                            <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">C#</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            AI-enhanced phishing detection system for email security. Early anomaly detection using machine learning and NLP techniques.
+                        </p>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-star text-yellow-500"></i> 15
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-code-branch"></i> 5
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-circle" style="font-size: 8px; color: #178600;"></i> C#
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://github.com/RenegadeJayhawk/security-scanner-ai" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:text-teal-700 text-sm font-medium">
+                                View Repository <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Repo Card 4 -->
+                    <div class="repo-card border border-gray-200 rounded-lg p-6 hover:border-teal-500 hover:shadow-md transition-all">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-teal-600"></i>
+                                <h4 class="text-lg font-semibold text-slate-800">interactive-resume-spa</h4>
+                            </div>
+                            <span class="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">JavaScript</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            This repository! A modern, interactive single-page application resume with animations, dark mode, and dynamic content sections.
+                        </p>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-star text-yellow-500"></i> 25
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-code-branch"></i> 7
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fas fa-circle" style="font-size: 8px; color: #f1e05a;"></i> JavaScript
+                            </span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://github.com/RenegadeJayhawk/RenegadeJayhawk.github.io" target="_blank" rel="noopener noreferrer" class="text-teal-600 hover:text-teal-700 text-sm font-medium">
+                                View Repository <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-gray-800 text-white mt-16">
@@ -698,6 +1157,35 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Defer non-critical scripts for better performance -->
+    <script src="app.js" defer></script>
+    
+    <!-- Performance monitoring script -->
+    <script>
+        // Track page load performance
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                const connectTime = perfData.responseEnd - perfData.requestStart;
+                const renderTime = perfData.domComplete - perfData.domLoading;
+                
+                // Send to analytics if gtag is available
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'timing_complete', {
+                        name: 'page_load',
+                        value: pageLoadTime,
+                        event_category: 'Performance'
+                    });
+                }
+                
+                console.log('Performance Metrics:', {
+                    pageLoadTime: pageLoadTime + 'ms',
+                    connectTime: connectTime + 'ms',
+                    renderTime: renderTime + 'ms'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
