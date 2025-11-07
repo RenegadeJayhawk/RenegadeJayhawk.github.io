@@ -167,8 +167,9 @@ body {
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
+    gap: 2rem;
 }
 
 .timeline-item:nth-child(odd) {
@@ -190,24 +191,24 @@ body {
 }
 
 .timeline-dot {
-    width: 3rem;
-    height: 3rem;
-    background-color: #0d9488;
-    border-radius: 9999px;
+    width: 41.666667%;
+    min-height: 100%;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 1.25rem;
     font-weight: bold;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     z-index: 10;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1rem;
 }
 
 .timeline-item:hover .timeline-dot {
-    transform: scale(1.1);
-    box-shadow: 0 8px 12px -2px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
 }
 
 .timeline-line {
@@ -392,7 +393,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 0.5rem;
 }
 
 /* Project Cards */
