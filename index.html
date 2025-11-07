@@ -108,6 +108,13 @@
                     <button onclick="toggleDarkMode()" class="flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
                         <i class="fas fa-moon" id="darkModeIcon"></i>
                     </button>
+                    <button onclick="toggleLanguage()" class="hidden md:flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="Change Language" aria-label="Change Language">
+                        <i class="fas fa-globe"></i>
+                        <span class="text-xs ml-1 font-semibold" id="currentLang">EN</span>
+                    </button>
+                    <button onclick="toggleChangelog()" class="hidden md:flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="View Version History" aria-label="View Version History">
+                        <i class="fas fa-history"></i>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -132,6 +139,22 @@
                     </div>
                 </div>
                 
+                <!-- Last Updated & Version Info -->
+                <div class="flex justify-center items-center gap-4 flex-wrap mb-8 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-calendar-alt text-teal-600" aria-hidden="true"></i>
+                        <span>Last Updated: <strong id="lastUpdated">November 6, 2025</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-code-branch text-teal-600" aria-hidden="true"></i>
+                        <span>Version: <strong id="resumeVersion">3.2.0</strong></span>
+                    </div>
+                    <button onclick="toggleChangelog()" class="flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium transition-colors">
+                        <i class="fas fa-list-alt" aria-hidden="true"></i>
+                        <span>View Changelog</span>
+                    </button>
+                </div>
+
                 <p class="mt-8 text-lg text-gray-700 leading-relaxed">
                     Hello! This interactive application is a visual exploration of my 20+ year career, my strategic pivot to AI leadership, and my portfolio of work.
                 </p>
@@ -1122,15 +1145,42 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Get in Touch</h4>
-                    <button onclick="openContactModal()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md font-medium transition-all flex items-center gap-2">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
+                    <h4 class="text-lg font-semibold mb-4">QR Code</h4>
+                    <div class="qr-code-container">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://renegadejayhawk.github.io" 
+                             alt="QR Code to Brad Allen's Resume" 
+                             class="qr-code"
+                             loading="lazy">
+                        <p class="text-xs text-gray-400 mt-2">Scan to view online resume</p>
+                    </div>
                 </div>
             </div>
             <div class="text-center text-gray-400 border-t border-gray-700 pt-8">
+                <div class="mb-4">
+                    <button onclick="openContactModal()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md font-medium transition-all inline-flex items-center gap-2">
+                        <i class="fas fa-paper-plane"></i> Get in Touch
+                    </button>
+                </div>
+                <div class="text-sm text-gray-400 mb-4">
+                    <p class="flex items-center justify-center gap-2">
+                        <i class="fas fa-calendar-alt"></i>
+                        Last Updated: <span id="footerLastUpdated" class="font-semibold">Nov 6, 2025</span>
+                    </p>
+                    <p class="flex items-center justify-center gap-2 mt-1">
+                        <i class="fas fa-code-branch"></i>
+                        Version: <span id="footerVersion" class="font-semibold">3.2.0</span>
+                    </p>
+                </div>
                 <p>&copy; 2025 Brad Allen. This is an interactive resume application.</p>
                 <p class="mt-2">Contact: bradallen25010@frontier.com | <a href="https://linkedin.com/in/bradallen-techleader" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 underline">LinkedIn</a></p>
+                <p class="mt-4 text-xs flex items-center justify-center gap-4">
+                    <button onclick="toggleLanguage()" class="hover:text-teal-300 transition-colors">
+                        <i class="fas fa-globe mr-1"></i><span id="footerLang">English</span>
+                    </button>
+                    <button onclick="toggleChangelog()" class="hover:text-teal-300 transition-colors">
+                        <i class="fas fa-history mr-1"></i>Version History
+                    </button>
+                </p>
             </div>
         </div>
     </footer>
@@ -1168,6 +1218,152 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div id="changelogModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="changelog-modal-title">
+        <div class="modal-content max-w-3xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800" id="changelog-modal-title">
+                    <i class="fas fa-history text-teal-600 mr-2"></i>
+                    Version History & Changelog
+                </h2>
+                <button onclick="toggleChangelog()" class="text-gray-500 hover:text-gray-700 text-2xl" aria-label="Close changelog modal">&times;</button>
+            </div>
+            
+            <div class="changelog-content">
+                <!-- Version 3.2.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge current">v3.2.0</span>
+                            <span class="text-sm text-gray-600">November 6, 2025</span>
+                        </div>
+                        <span class="badge badge-feature">Current</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Mobile Experience & Professional Touches</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-feature">Feature</span> Added pull-to-refresh functionality for mobile</li>
+                        <li><span class="badge badge-feature">Feature</span> Implemented swipe gestures for section navigation</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Enhanced touch targets to 48x48px minimum</li>
+                        <li><span class="badge badge-feature">Feature</span> Mobile-optimized chart with responsive sizing</li>
+                        <li><span class="badge badge-feature">Feature</span> Added version history and changelog modal</li>
+                        <li><span class="badge badge-feature">Feature</span> Integrated QR code for print resume distribution</li>
+                        <li><span class="badge badge-feature">Feature</span> Language selector for international accessibility</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Last updated date display in multiple locations</li>
+                    </ul>
+                </div>
+
+                <!-- Version 3.1.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge">v3.1.0</span>
+                            <span class="text-sm text-gray-600">November 5, 2025</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Accessibility Improvements</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-a11y">A11y</span> Added skip navigation link for keyboard users</li>
+                        <li><span class="badge badge-a11y">A11y</span> Enhanced focus states with 3px teal outline</li>
+                        <li><span class="badge badge-a11y">A11y</span> Comprehensive ARIA labels throughout</li>
+                        <li><span class="badge badge-a11y">A11y</span> Keyboard navigation with Enter/Space support</li>
+                        <li><span class="badge badge-a11y">A11y</span> Screen reader announcements for dynamic content</li>
+                        <li><span class="badge badge-a11y">A11y</span> WCAG 2.1 Level AA compliance achieved</li>
+                    </ul>
+                </div>
+
+                <!-- Version 3.0.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge">v3.0.0</span>
+                            <span class="text-sm text-gray-600">November 4, 2025</span>
+                        </div>
+                        <span class="badge badge-major">Major</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Content Expansion & Analytics</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-feature">Feature</span> Added Testimonials & Recommendations section</li>
+                        <li><span class="badge badge-feature">Feature</span> Speaking Engagements showcase</li>
+                        <li><span class="badge badge-feature">Feature</span> Blog & Articles thought leadership section</li>
+                        <li><span class="badge badge-feature">Feature</span> GitHub Contributions with live calendar</li>
+                        <li><span class="badge badge-feature">Feature</span> Featured Repositories showcase</li>
+                        <li><span class="badge badge-feature">Feature</span> Google Analytics integration with SPA tracking</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Performance monitoring and metrics</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Enhanced print stylesheet for PDF generation</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Chart loading states with spinner</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> SEO meta tags and Open Graph support</li>
+                    </ul>
+                </div>
+
+                <!-- Version 2.0.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge">v2.0.0</span>
+                            <span class="text-sm text-gray-600">October 28, 2025</span>
+                        </div>
+                        <span class="badge badge-major">Major</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Visual Enhancements & Dark Mode</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-feature">Feature</span> Dark mode toggle with localStorage persistence</li>
+                        <li><span class="badge badge-feature">Feature</span> Profile photo with hover effects</li>
+                        <li><span class="badge badge-feature">Feature</span> Company logos in timeline dots</li>
+                        <li><span class="badge badge-feature">Feature</span> Project thumbnails for AI Focus cards</li>
+                        <li><span class="badge badge-feature">Feature</span> Animated skill progress bars (16 skills)</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> CSS custom properties for theming</li>
+                    </ul>
+                </div>
+
+                <!-- Version 1.5.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge">v1.5.0</span>
+                            <span class="text-sm text-gray-600">October 25, 2025</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Interactivity Enhancement</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-feature">Feature</span> Download PDF button with print dialog</li>
+                        <li><span class="badge badge-feature">Feature</span> Contact form modal with email integration</li>
+                        <li><span class="badge badge-feature">Feature</span> Social media icons with hover effects</li>
+                        <li><span class="badge badge-feature">Feature</span> Expandable timeline items</li>
+                        <li><span class="badge badge-enhancement">Enhancement</span> Font Awesome icon library integration</li>
+                    </ul>
+                </div>
+
+                <!-- Version 1.0.0 -->
+                <div class="changelog-entry">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-3">
+                            <span class="version-badge">v1.0.0</span>
+                            <span class="text-sm text-gray-600">October 20, 2025</span>
+                        </div>
+                        <span class="badge badge-major">Major</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Initial Release</h3>
+                    <ul class="changelog-list">
+                        <li><span class="badge badge-feature">Feature</span> Single Page Application (SPA) architecture</li>
+                        <li><span class="badge badge-feature">Feature</span> Responsive design with Tailwind CSS</li>
+                        <li><span class="badge badge-feature">Feature</span> 5 core sections (Overview, Timeline, AI Focus, Achievements, Education)</li>
+                        <li><span class="badge badge-feature">Feature</span> Chart.js visualization for skills</li>
+                        <li><span class="badge badge-feature">Feature</span> Smooth section transitions and animations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-sm text-gray-600">
+                    <i class="fas fa-info-circle text-teal-600 mr-2"></i>
+                    <strong>Versioning:</strong> This resume follows semantic versioning (MAJOR.MINOR.PATCH). 
+                    Major versions indicate significant content or feature additions, minor versions include enhancements, 
+                    and patches represent bug fixes and minor updates.
+                </p>
+            </div>
         </div>
     </div>
 

@@ -632,6 +632,240 @@ document.addEventListener('touchend', (e) => {
     lastTouchEnd = now;
 }, { passive: false });
 
+// ==========================================
+// PROFESSIONAL TOUCHES
+// ==========================================
+
+// Language configuration
+const languages = {
+    en: {
+        code: 'EN',
+        name: 'English',
+        flag: '🇺🇸'
+    },
+    es: {
+        code: 'ES',
+        name: 'Español',
+        flag: '🇪🇸'
+    },
+    fr: {
+        code: 'FR',
+        name: 'Français',
+        flag: '🇫🇷'
+    },
+    de: {
+        code: 'DE',
+        name: 'Deutsch',
+        flag: '🇩🇪'
+    },
+    zh: {
+        code: 'ZH',
+        name: '中文',
+        flag: '🇨🇳'
+    }
+};
+
+let currentLanguage = 'en';
+
+// Toggle Language
+function toggleLanguage() {
+    const langKeys = Object.keys(languages);
+    const currentIndex = langKeys.indexOf(currentLanguage);
+    const nextIndex = (currentIndex + 1) % langKeys.length;
+    currentLanguage = langKeys[nextIndex];
+    
+    const lang = languages[currentLanguage];
+    
+    // Update UI
+    const langElements = document.querySelectorAll('#currentLang');
+    langElements.forEach(el => {
+        el.textContent = lang.code;
+    });
+    
+    const footerLang = document.getElementById('footerLang');
+    if (footerLang) {
+        footerLang.textContent = `${lang.flag} ${lang.name}`;
+    }
+    
+    // Store preference
+    localStorage.setItem('preferredLanguage', currentLanguage);
+    
+    // Track language change
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'language_change', {
+            language: currentLanguage,
+            event_category: 'Localization'
+        });
+    }
+    
+    // Announce to screen reader
+    announceToScreenReader(`Language changed to ${lang.name}`);
+    
+    // Show notification
+    showNotification(`Language changed to ${lang.flag} ${lang.name}`, 'info');
+    
+    // In a real implementation, you would load translations here
+    // loadTranslations(currentLanguage);
+}
+
+// Toggle Changelog Modal
+function toggleChangelog() {
+    const modal = document.getElementById('changelogModal');
+    
+    if (modal.classList.contains('show')) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        announceToScreenReader('Changelog closed');
+    } else {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        announceToScreenReader('Changelog opened');
+        
+        // Track changelog view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'changelog_view', {
+                event_category: 'Engagement'
+            });
+        }
+        
+        // Focus first element
+        setTimeout(() => {
+            const firstEntry = modal.querySelector('.changelog-entry');
+            if (firstEntry) firstEntry.focus();
+        }, 100);
+    }
+}
+
+// Show notification toast
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas ${type === 'info' ? 'fa-info-circle' : 'fa-check-circle'} mr-2"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Add styles inline for simplicity
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '80px',
+        right: '20px',
+        background: type === 'info' ? '#0d9488' : '#10b981',
+        color: 'white',
+        padding: '12px 20px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+        zIndex: '9999',
+        animation: 'slideInRight 0.3s ease-out',
+        fontSize: '14px',
+        fontWeight: '500'
+    });
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Update last updated date dynamically
+function updateLastUpdatedDate() {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = now.toLocaleDateString('en-US', options);
+    
+    // Update all instances
+    const lastUpdatedElements = document.querySelectorAll('#lastUpdated, #footerLastUpdated');
+    lastUpdatedElements.forEach(el => {
+        if (el.id === 'footerLastUpdated') {
+            el.textContent = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } else {
+            el.textContent = formattedDate;
+        }
+    });
+}
+
+// Initialize professional touches
+function initProfessionalFeatures() {
+    // Load saved language preference
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && languages[savedLang]) {
+        currentLanguage = savedLang;
+        const lang = languages[currentLanguage];
+        document.querySelectorAll('#currentLang').forEach(el => {
+            el.textContent = lang.code;
+        });
+        const footerLang = document.getElementById('footerLang');
+        if (footerLang) {
+            footerLang.textContent = `${lang.flag} ${lang.name}`;
+        }
+    }
+    
+    // Update version info
+    updateVersionInfo();
+    
+    // Close modals on outside click
+    window.addEventListener('click', (e) => {
+        const changelogModal = document.getElementById('changelogModal');
+        if (e.target === changelogModal) {
+            toggleChangelog();
+        }
+    });
+}
+
+// Update version information
+function updateVersionInfo() {
+    const version = '3.2.0';
+    const versionElements = document.querySelectorAll('#resumeVersion, #footerVersion');
+    versionElements.forEach(el => {
+        el.textContent = version;
+    });
+}
+
+// Add CSS animations for notifications
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initProfessionalFeatures();
+});
+
 // Dark Mode Toggle
 function toggleDarkMode() {
     const body = document.body;

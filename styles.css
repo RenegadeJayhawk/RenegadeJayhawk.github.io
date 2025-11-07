@@ -1109,6 +1109,271 @@ body.mobile-device * {
     -webkit-touch-callout: none;
 }
 
+/* ==========================================
+   PROFESSIONAL TOUCHES
+   ========================================== */
+
+/* Version & Last Updated Info */
+.flex.justify-center.items-center.gap-4.flex-wrap {
+    animation: fadeInUp 0.6s ease-out 0.3s backwards;
+}
+
+/* QR Code Styling */
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.qr-code {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #0d9488;
+    border-radius: 8px;
+    padding: 8px;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qr-code:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+body.dark-mode .qr-code {
+    border-color: #14b8a6;
+    background: white;
+}
+
+/* Print-specific QR code positioning */
+@media print {
+    .qr-code-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 10px;
+        border: 2px solid #0d9488;
+        border-radius: 8px;
+    }
+    
+    .qr-code {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Changelog Modal Styles */
+.changelog-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.changelog-entry {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f9fafb, #ffffff);
+    border-left: 4px solid #0d9488;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.changelog-entry:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .changelog-entry {
+    background: linear-gradient(135deg, #1f2937, #374151);
+    border-left-color: #14b8a6;
+}
+
+.changelog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.changelog-list li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+body.dark-mode .changelog-list li {
+    color: #d1d5db;
+}
+
+/* Version Badges */
+.version-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+.version-badge.current {
+    background: linear-gradient(135deg, #059669, #10b981);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Category Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-feature {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-enhancement {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-bugfix {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-major {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-a11y {
+    background: #e9d5ff;
+    color: #6b21a8;
+}
+
+body.dark-mode .badge-feature {
+    background: #1e3a8a;
+    color: #bfdbfe;
+}
+
+body.dark-mode .badge-enhancement {
+    background: #14532d;
+    color: #bbf7d0;
+}
+
+body.dark-mode .badge-bugfix {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+body.dark-mode .badge-major {
+    background: #78350f;
+    color: #fef3c7;
+}
+
+body.dark-mode .badge-a11y {
+    background: #581c87;
+    color: #e9d5ff;
+}
+
+/* Language Selector Indicator */
+#currentLang {
+    font-weight: 600;
+    font-size: 10px;
+}
+
+/* Changelog Modal Specific */
+#changelogModal .modal-content {
+    max-width: 900px;
+}
+
+#changelogModal .changelog-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#changelogModal .changelog-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#changelogModal .changelog-content::-webkit-scrollbar-thumb {
+    background: #0d9488;
+    border-radius: 10px;
+}
+
+#changelogModal .changelog-content::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+}
+
+body.dark-mode #changelogModal .changelog-content::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+body.dark-mode #changelogModal .changelog-content::-webkit-scrollbar-thumb {
+    background: #14b8a6;
+}
+
+/* Last Updated Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+#lastUpdated,
+#resumeVersion {
+    position: relative;
+    overflow: hidden;
+}
+
+#lastUpdated::after,
+#resumeVersion::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.3), transparent);
+    animation: shimmer 3s infinite;
+}
+
+/* Mobile adjustments for professional touches */
+@media (max-width: 768px) {
+    .changelog-content {
+        max-height: 50vh;
+    }
+    
+    .qr-code {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .changelog-entry {
+        padding: 15px;
+    }
+    
+    .version-badge {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+}
+
 /* Optimize images for mobile */
 @media (max-width: 768px) {
     img {
