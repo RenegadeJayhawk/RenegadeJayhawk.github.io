@@ -837,6 +837,292 @@ body {
 }
 
 /* ==========================================
+   MOBILE EXPERIENCE ENHANCEMENTS
+   ========================================== */
+
+/* Pull to Refresh Indicator */
+.pull-to-refresh {
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: top 0.3s ease;
+    text-align: center;
+    min-width: 200px;
+}
+
+.pull-to-refresh.active {
+    top: 0;
+}
+
+.pull-to-refresh.refreshing .pull-to-refresh-icon i {
+    animation: spin 1s linear infinite;
+}
+
+.pull-to-refresh-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.pull-to-refresh-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Swipe Navigation Indicator */
+.swipe-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(20, 184, 166, 0.1));
+    border-radius: 12px;
+    color: #0d9488;
+    font-size: 14px;
+    font-weight: 500;
+    animation: pulse 2s ease-in-out infinite;
+    touch-action: none;
+}
+
+.swipe-indicator i {
+    font-size: 16px;
+}
+
+body.dark-mode .swipe-indicator {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(20, 184, 166, 0.2));
+    color: #14b8a6;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+}
+
+/* Enhanced Touch Targets for Mobile */
+@media (max-width: 768px) {
+    /* Minimum 48x48px touch targets */
+    button,
+    a.nav-link,
+    .certification-badge,
+    .social-icon,
+    .social-icon-footer,
+    [onclick] {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 12px 16px;
+    }
+    
+    /* Larger tap areas for navigation */
+    .nav-link {
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    
+    /* Better spacing for mobile */
+    .timeline-item {
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    
+    .project-card,
+    .achievement-card,
+    .testimonial-card {
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+    
+    /* Larger text for readability */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
+    
+    h3 {
+        font-size: 22px;
+    }
+    
+    /* Better mobile select dropdown */
+    select.nav-link {
+        font-size: 16px;
+        padding: 14px;
+        min-height: 48px;
+    }
+    
+    /* Improve form inputs on mobile */
+    input,
+    textarea {
+        font-size: 16px;
+        padding: 14px;
+        min-height: 48px;
+    }
+    
+    /* Better mobile modal */
+    .modal-content {
+        margin: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Optimize chart for mobile */
+    .chart-container {
+        height: 300px !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    #aiSkillsChart {
+        min-height: 300px;
+    }
+    
+    /* Better spacing for mobile buttons */
+    header .flex.items-center.gap-4 {
+        gap: 8px;
+    }
+    
+    /* Hide button text on small screens, show icons only */
+    @media (max-width: 640px) {
+        header button span {
+            display: none;
+        }
+        
+        header button {
+            padding: 12px;
+        }
+    }
+    
+    /* Improve skill bars on mobile */
+    .skill-bar-container {
+        margin-bottom: 20px;
+    }
+    
+    /* Better mobile footer */
+    footer {
+        font-size: 14px;
+    }
+    
+    .social-icon-footer {
+        font-size: 24px;
+        padding: 12px;
+    }
+}
+
+/* Touch feedback for interactive elements */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices */
+    button:active,
+    a:active,
+    [onclick]:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    
+    .nav-link:active {
+        background-color: rgba(20, 184, 166, 0.2);
+    }
+    
+    .project-card:active,
+    .achievement-card:active,
+    .testimonial-card:active,
+    .article-card:active,
+    .repo-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Prevent text selection during swipe */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Swipe transition animation */
+section[data-section] {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+section[data-section].swipe-left {
+    animation: swipeLeft 0.3s ease-out;
+}
+
+section[data-section].swipe-right {
+    animation: swipeRight 0.3s ease-out;
+}
+
+@keyframes swipeLeft {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes swipeRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Mobile device specific styles */
+body.mobile-device {
+    -webkit-tap-highlight-color: rgba(13, 148, 136, 0.2);
+}
+
+body.mobile-device * {
+    -webkit-touch-callout: none;
+}
+
+/* Optimize images for mobile */
+@media (max-width: 768px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .profile-photo img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* ==========================================
    ACCESSIBILITY - SKIP LINK
    ========================================== */
 

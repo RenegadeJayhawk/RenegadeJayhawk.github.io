@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="description" content="Brad Allen - AI Strategy & Engineering Leader with 20+ years of experience in enterprise AI adoption, prompt engineering, and digital transformation.">
     <meta name="keywords" content="AI Strategy, Engineering Leader, Prompt Engineering, Digital Transformation, Machine Learning, Cloud Architecture">
     <meta name="author" content="Brad Allen">
@@ -52,6 +55,14 @@
     </script>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
+    <!-- Pull to Refresh Indicator -->
+    <div id="pullToRefresh" class="pull-to-refresh">
+        <div class="pull-to-refresh-icon">
+            <i class="fas fa-sync-alt"></i>
+        </div>
+        <div class="pull-to-refresh-text">Pull to refresh</div>
+    </div>
 
     <!-- Skip Navigation Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>

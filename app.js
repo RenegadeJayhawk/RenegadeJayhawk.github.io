@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('darkModeIcon').classList.replace('fa-moon', 'fa-sun');
     }
     
+    // Initialize mobile features
+    initMobileFeatures();
+    
     // Animate skill bars when they come into view
     const observerOptions = {
         threshold: 0.5,
@@ -98,7 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 }
-            }
+            },
+            // Mobile-optimized chart configuration
+            responsive: true,
+            maintainAspectRatio: window.innerWidth > 768
         });
             
             // Hide loading state and show chart
@@ -387,6 +393,244 @@ document.addEventListener('DOMContentLoaded', function() {
         trapFocusInModal(modal);
     }
 });
+
+// ==========================================
+// MOBILE EXPERIENCE ENHANCEMENTS
+// ==========================================
+
+// Section order for swipe navigation
+const sectionOrder = ['overview', 'timeline', 'ai-focus', 'achievements', 'education-skills', 'testimonials', 'contributions'];
+let currentSectionIndex = 0;
+
+function initMobileFeatures() {
+    // Pull to refresh
+    initPullToRefresh();
+    
+    // Swipe gestures
+    initSwipeGestures();
+    
+    // Optimize chart for mobile
+    optimizeChartForMobile();
+    
+    // Auto-hide swipe indicator after first use
+    setTimeout(() => {
+        const indicator = document.querySelector('.swipe-indicator');
+        if (indicator) {
+            indicator.style.animation = 'fadeOut 1s ease-out forwards';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 1000);
+        }
+    }, 5000);
+}
+
+// Pull to Refresh functionality
+function initPullToRefresh() {
+    let startY = 0;
+    let isPulling = false;
+    const pullThreshold = 80;
+    const refreshIndicator = document.getElementById('pullToRefresh');
+    
+    if (!refreshIndicator) return;
+    
+    document.addEventListener('touchstart', (e) => {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+            isPulling = true;
+        }
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (!isPulling) return;
+        
+        const currentY = e.touches[0].clientY;
+        const pullDistance = currentY - startY;
+        
+        if (pullDistance > 0 && pullDistance < pullThreshold * 2) {
+            refreshIndicator.style.top = `${Math.min(pullDistance - 80, 0)}px`;
+            
+            if (pullDistance > pullThreshold) {
+                refreshIndicator.classList.add('active');
+                refreshIndicator.querySelector('.pull-to-refresh-text').textContent = 'Release to refresh';
+            } else {
+                refreshIndicator.classList.remove('active');
+                refreshIndicator.querySelector('.pull-to-refresh-text').textContent = 'Pull to refresh';
+            }
+        }
+    }, { passive: true });
+    
+    document.addEventListener('touchend', () => {
+        if (!isPulling) return;
+        
+        const isActive = refreshIndicator.classList.contains('active');
+        
+        if (isActive) {
+            refreshIndicator.classList.add('refreshing');
+            refreshIndicator.querySelector('.pull-to-refresh-text').textContent = 'Refreshing...';
+            
+            // Simulate refresh (reload page or update content)
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        } else {
+            refreshIndicator.style.top = '-80px';
+        }
+        
+        isPulling = false;
+    }, { passive: true });
+}
+
+// Swipe gestures for section navigation
+function initSwipeGestures() {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    const swipeThreshold = 50;
+    const main = document.getElementById('main-content');
+    
+    if (!main) return;
+    
+    main.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    
+    main.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const xDiff = touchStartX - touchEndX;
+        const yDiff = touchStartY - touchEndY;
+        
+        // Check if horizontal swipe is more significant than vertical
+        if (Math.abs(xDiff) > Math.abs(yDiff) && Math.abs(xDiff) > swipeThreshold) {
+            if (xDiff > 0) {
+                // Swipe left - next section
+                navigateToNextSection();
+            } else {
+                // Swipe right - previous section
+                navigateToPreviousSection();
+            }
+        }
+    }
+}
+
+function navigateToNextSection() {
+    const nextIndex = (currentSectionIndex + 1) % sectionOrder.length;
+    navigateToSection(nextIndex, 'left');
+}
+
+function navigateToPreviousSection() {
+    const prevIndex = (currentSectionIndex - 1 + sectionOrder.length) % sectionOrder.length;
+    navigateToSection(prevIndex, 'right');
+}
+
+function navigateToSection(index, direction) {
+    const sectionName = sectionOrder[index];
+    const targetSection = document.querySelector(`[data-section="${sectionName}"]`);
+    
+    if (!targetSection) return;
+    
+    // Add swipe animation
+    targetSection.classList.add(`swipe-${direction}`);
+    
+    // Navigate to section
+    showSection(sectionName);
+    currentSectionIndex = index;
+    
+    // Update mobile select if exists
+    const mobileSelect = document.querySelector('select.nav-link');
+    if (mobileSelect) {
+        mobileSelect.value = sectionName;
+    }
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+        targetSection.classList.remove(`swipe-${direction}`);
+    }, 300);
+    
+    // Provide haptic feedback if available
+    if ('vibrate' in navigator) {
+        navigator.vibrate(10);
+    }
+}
+
+// Optimize chart for mobile devices
+function optimizeChartForMobile() {
+    if (window.innerWidth <= 768) {
+        const chartCanvas = document.getElementById('aiSkillsChart');
+        if (chartCanvas) {
+            // Chart will be more compact on mobile
+            chartCanvas.style.touchAction = 'pan-y';
+        }
+    }
+}
+
+// Update current section index when navigating via other methods
+function showSection(sectionId, element) {
+    const allSections = document.querySelectorAll('[data-section]');
+    const targetSection = document.querySelector(`[data-section="${sectionId}"]`);
+    
+    // Update current section index for swipe navigation
+    const sectionIndex = sectionOrder.indexOf(sectionId);
+    if (sectionIndex !== -1) {
+        currentSectionIndex = sectionIndex;
+    }
+    
+    // Remove active class from all sections
+    allSections.forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Add active class to target section
+        if (targetSection) {
+            targetSection.classList.add('active');
+            trackSectionView(sectionId);
+        }
+    }, 50);
+    
+    // Update active nav link for keyboard navigation
+    updateActiveNavLink(element);
+    
+    // Announce section change to screen readers
+    announceToScreenReader(`Navigated to ${sectionId} section`);
+}
+
+// Detect mobile device
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+}
+
+// Add touch-friendly class to body on mobile
+if (isMobileDevice()) {
+    document.body.classList.add('mobile-device');
+}
+
+// Handle orientation change
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        optimizeChartForMobile();
+    }, 200);
+});
+
+// Prevent zoom on double tap for better UX
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, { passive: false });
 
 // Dark Mode Toggle
 function toggleDarkMode() {
