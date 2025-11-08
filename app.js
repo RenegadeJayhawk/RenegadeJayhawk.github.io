@@ -1,35 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     showSection('overview', document.querySelector('.nav-link[onclick*="overview"]'));
     
-    // Initialize dark mode from localStorage
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkModeIcon').classList.replace('fa-moon', 'fa-sun');
-    }
-    
-    // Initialize mobile features
-    initMobileFeatures();
-    
-    // Animate skill bars when they come into view
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-                    bar.style.width = bar.getAttribute('style').match(/width:\s*(\d+%)/)[1];
-                });
-            }
-        });
-    }, observerOptions);
-    
-    document.querySelectorAll('.skill-bar-container').forEach(container => {
-        observer.observe(container.parentElement);
-    });
-    
     const aiSkillsData = {
         labels: [
             'Generative AI', 
@@ -116,6 +87,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     initializeChart();
+
+    // Initialize dark mode from localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkModeIcon').classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Initialize mobile features
+    initMobileFeatures();
+
+    // Animate skill bars when they come into view
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('style').match(/width:\s*(\d+%)/)[1];
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-bar-container').forEach(container => {
+        observer.observe(container.parentElement);
+    });
+
+    // Initialize accessibility features
+    setupKeyboardNavigation();
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+        trapFocusInModal(modal);
+    }
 });
 
 // Track section views in analytics
@@ -126,34 +133,6 @@ function trackSectionView(sectionName) {
             event_category: 'Navigation'
         });
     }
-}
-
-function showSection(sectionId, element) {
-    const allSections = document.querySelectorAll('[data-section]');
-    const targetSection = document.querySelector(`[data-section="${sectionId}"]`);
-    
-    // Remove active class from all sections
-    allSections.forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Small delay to ensure smooth transition
-    setTimeout(() => {
-        // Scroll to top smoothly
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Add active class to target section
-        if (targetSection) {
-            targetSection.classList.add('active');
-            trackSectionView(sectionId);
-        }
-    }, 50);
-    
-    // Update active nav link for keyboard navigation
-    updateActiveNavLink(element);
-    
-    // Announce section change to screen readers
-    announceToScreenReader(`Navigated to ${sectionId} section`);
 }
 
 function wrapText(text, maxCharsPerLine) {
@@ -384,16 +363,6 @@ function trapFocusInModal(modal) {
     });
 }
 
-// Initialize accessibility features on page load
-document.addEventListener('DOMContentLoaded', function() {
-    setupKeyboardNavigation();
-    
-    const modal = document.getElementById('contactModal');
-    if (modal) {
-        trapFocusInModal(modal);
-    }
-});
-
 // ==========================================
 // MOBILE EXPERIENCE ENHANCEMENTS
 // ==========================================
@@ -568,41 +537,6 @@ function optimizeChartForMobile() {
             chartCanvas.style.touchAction = 'pan-y';
         }
     }
-}
-
-// Update current section index when navigating via other methods
-function showSection(sectionId, element) {
-    const allSections = document.querySelectorAll('[data-section]');
-    const targetSection = document.querySelector(`[data-section="${sectionId}"]`);
-    
-    // Update current section index for swipe navigation
-    const sectionIndex = sectionOrder.indexOf(sectionId);
-    if (sectionIndex !== -1) {
-        currentSectionIndex = sectionIndex;
-    }
-    
-    // Remove active class from all sections
-    allSections.forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Small delay to ensure smooth transition
-    setTimeout(() => {
-        // Scroll to top smoothly
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Add active class to target section
-        if (targetSection) {
-            targetSection.classList.add('active');
-            trackSectionView(sectionId);
-        }
-    }, 50);
-    
-    // Update active nav link for keyboard navigation
-    updateActiveNavLink(element);
-    
-    // Announce section change to screen readers
-    announceToScreenReader(`Navigated to ${sectionId} section`);
 }
 
 // Detect mobile device
@@ -902,9 +836,6 @@ function initInteractiveElements() {
     if (achievementsSection) {
         achievementsObserver.observe(achievementsSection);
     }
-    
-    // Initialize timeline zoom/pan
-    initTimelineZoomPan();
 }
 
 // ==========================================
@@ -1209,123 +1140,6 @@ function closeProjectModal() {
     announceToScreenReader('Project details closed');
 }
 
-// ==========================================
-// TIMELINE ZOOM & PAN
-// ==========================================
-
-let timelineZoom = 1;
-let timelinePanning = false;
-let timelineStartX = 0;
-let timelineStartY = 0;
-let timelineScrollLeft = 0;
-let timelineScrollTop = 0;
-
-function initTimelineZoomPan() {
-    const container = document.getElementById('timelineContainer');
-    if (!container) return;
-    
-    // Mouse wheel zoom (desktop)
-    container.addEventListener('wheel', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            const delta = e.deltaY > 0 ? -0.1 : 0.1;
-            adjustZoom(delta);
-        }
-    }, { passive: false });
-    
-    // Pan functionality
-    container.addEventListener('mousedown', (e) => {
-        if (timelineZoom > 1) {
-            timelinePanning = true;
-            container.classList.add('panning');
-            timelineStartX = e.pageX - container.offsetLeft;
-            timelineStartY = e.pageY - container.offsetTop;
-            timelineScrollLeft = container.scrollLeft || 0;
-            timelineScrollTop = container.scrollTop || 0;
-        }
-    });
-    
-    document.addEventListener('mousemove', (e) => {
-        if (!timelinePanning) return;
-        e.preventDefault();
-        const container = document.getElementById('timelineContainer');
-        const x = e.pageX - container.offsetLeft;
-        const y = e.pageY - container.offsetTop;
-        const walkX = (x - timelineStartX) * 2;
-        const walkY = (y - timelineStartY) * 2;
-        
-        if (container.parentElement) {
-            container.parentElement.scrollLeft = timelineScrollLeft - walkX;
-            container.parentElement.scrollTop = timelineScrollTop - walkY;
-        }
-    });
-    
-    document.addEventListener('mouseup', () => {
-        if (timelinePanning) {
-            timelinePanning = false;
-            const container = document.getElementById('timelineContainer');
-            if (container) {
-                container.classList.remove('panning');
-            }
-        }
-    });
-}
-
-function zoomTimeline(direction) {
-    const delta = direction === 'in' ? 0.2 : -0.2;
-    adjustZoom(delta);
-    
-    // Track zoom interaction
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'timeline_zoom', {
-            direction: direction,
-            zoom_level: timelineZoom,
-            event_category: 'Timeline'
-        });
-    }
-}
-
-function adjustZoom(delta) {
-    timelineZoom = Math.max(0.5, Math.min(2, timelineZoom + delta));
-    updateTimelineZoom();
-}
-
-function updateTimelineZoom() {
-    const container = document.getElementById('timelineContainer');
-    const zoomLevel = document.getElementById('zoomLevel');
-    
-    if (container) {
-        container.style.transform = `scale(${timelineZoom})`;
-    }
-    
-    if (zoomLevel) {
-        zoomLevel.textContent = `${Math.round(timelineZoom * 100)}%`;
-    }
-    
-    announceToScreenReader(`Timeline zoom: ${Math.round(timelineZoom * 100)}%`);
-}
-
-function resetTimelineZoom() {
-    timelineZoom = 1;
-    updateTimelineZoom();
-    
-    // Reset pan position
-    const container = document.getElementById('timelineContainer');
-    if (container && container.parentElement) {
-        container.parentElement.scrollLeft = 0;
-        container.parentElement.scrollTop = 0;
-    }
-    
-    announceToScreenReader('Timeline zoom reset');
-    
-    // Track reset
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'timeline_zoom_reset', {
-            event_category: 'Timeline'
-        });
-    }
-}
-
 // Close project modal when clicking outside
 window.addEventListener('click', (e) => {
     const projectModal = document.getElementById('projectModal');
@@ -1333,3 +1147,35 @@ window.addEventListener('click', (e) => {
         closeProjectModal();
     }
 });
+
+// Update current section index when navigating via other methods
+function showSection(sectionId, element) {
+    const allSections = document.querySelectorAll('[data-section]');
+    const targetSection = document.querySelector(`[data-section="${sectionId}"]`);
+
+    // Update current section index for swipe navigation
+    const sectionIndex = sectionOrder.indexOf(sectionId);
+    if (sectionIndex !== -1) {
+        currentSectionIndex = sectionIndex;
+    }
+
+    // Remove active class from all sections
+    allSections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Small delay to ensure smooth transition
+    setTimeout(() => {
+        // Add active class to target section
+        if (targetSection) {
+            targetSection.classList.add('active');
+            trackSectionView(sectionId);
+        }
+    }, 50);
+
+    // Update active nav link for keyboard navigation
+    updateActiveNavLink(element);
+
+    // Announce section change to screen readers
+    announceToScreenReader(`Navigated to ${sectionId} section`);
+}

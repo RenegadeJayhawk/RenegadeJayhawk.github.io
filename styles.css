@@ -980,14 +980,19 @@ body.dark-mode .swipe-indicator {
         margin: 20px;
         max-height: calc(100vh - 40px);
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        /* Removed unsupported -webkit-overflow-scrolling; use standard properties */
+        overscroll-behavior: contain;
+        touch-action: pan-y;
     }
     
     /* Optimize chart for mobile */
     .chart-container {
         height: 300px !important;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-y: hidden;
+        overscroll-behavior: contain;
+        touch-action: pan-x;
+        scroll-behavior: smooth;
     }
     
     #aiSkillsChart {
@@ -1631,39 +1636,6 @@ body.dark-mode .project-detail-section li {
 
 /* Timeline Controls */body.dark-mode .project-detail-section {
     border-bottom-color: #374151;
-}
-
-/* Timeline Zoom Controls */
-.timeline-control-btn {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-control-btn:active {
-    transform: scale(0.95);
-}
-
-.timeline-zoomable {
-    transition: transform 0.3s ease-out;
-    will-change: transform;
-}
-
-#zoomLevel {
-    min-width: 50px;
-    font-weight: 600;
-    color: #0d9488;
-}
-
-body.dark-mode #zoomLevel {
-    color: #14b8a6;
-}
-
-/* Pan functionality */
-.timeline-zoomable.panning {
-    cursor: grabbing;
-}
-
-.timeline-zoomable:not(.panning) {
-    cursor: grab;
 }
 
 /* Smooth animations for timeline */

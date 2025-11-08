@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -31,12 +31,13 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Preload critical images for faster rendering -->
-    <link rel="preload" href="images/profile.jpg" as="image" type="image/jpeg" fetchpriority="high">
+    <link rel="preload" href="images/profile.jpg" as="image" type="image/jpeg">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="lang-dots.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -136,7 +137,6 @@
                                  alt="Brad Allen - AI Strategy & Engineering Leader" 
                                  class="w-48 h-48 rounded-full object-cover shadow-lg"
                                  loading="eager"
-                                 fetchpriority="high"
                                  width="192"
                                  height="192">
                         </div>
@@ -245,27 +245,7 @@
             <p class="text-lg text-gray-700 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
                 My career is built on a foundation of delivering complex software in demanding environments. This timeline shows my progression from hands-on technologist to senior leader, culminating in my current role driving AI adoption.
             </p>
-            
-            <!-- Timeline Controls -->
-            <div class="flex justify-center items-center gap-4 mb-8">
-                <button onclick="zoomTimeline('in')" class="timeline-control-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Zoom In" aria-label="Zoom in timeline">
-                    <i class="fas fa-search-plus"></i>
-                    <span class="hidden sm:inline">Zoom In</span>
-                </button>
-                <button onclick="zoomTimeline('out')" class="timeline-control-btn bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Zoom Out" aria-label="Zoom out timeline">
-                    <i class="fas fa-search-minus"></i>
-                    <span class="hidden sm:inline">Zoom Out</span>
-                </button>
-                <button onclick="resetTimelineZoom()" class="timeline-control-btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition-all flex items-center gap-2" title="Reset View" aria-label="Reset timeline view">
-                    <i class="fas fa-undo"></i>
-                    <span class="hidden sm:inline">Reset</span>
-                </button>
-                <div class="text-sm text-gray-600 ml-2">
-                    <span id="zoomLevel">100%</span>
-                </div>
-            </div>
-
-            <div id="timelineContainer" class="relative max-w-4xl mx-auto timeline-zoomable" style="transform-origin: center top;">
+            <div id="timelineContainer" class="relative max-w-4xl mx-auto">
                 <div class="timeline-line hidden md:block"></div>
                 
                 <div class="timeline-item">
@@ -638,7 +618,7 @@
                         <div class="loader"></div>
                         <p class="text-gray-600 mt-4">Loading chart...</p>
                     </div>
-                    <div class="chart-container" style="display: none;">
+                    <div class="chart-container hidden">
                         <canvas id="aiSkillsChart"></canvas>
                     </div>
                 </div>
@@ -657,7 +637,7 @@
                                     <span class="text-sm font-medium text-gray-700">95%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                    <div class="skill-bar-fill w-[95%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -666,7 +646,7 @@
                                     <span class="text-sm font-medium text-gray-700">90%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 90%"></div>
+                                    <div class="skill-bar-fill w-[90%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -675,7 +655,7 @@
                                     <span class="text-sm font-medium text-gray-700">95%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                    <div class="skill-bar-fill w-[95%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -684,7 +664,7 @@
                                     <span class="text-sm font-medium text-gray-700">85%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                    <div class="skill-bar-fill w-[85%]"></div>
                                 </div>
                             </div>
                         </div>
@@ -699,7 +679,7 @@
                                     <span class="text-sm font-medium text-gray-700">90%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 90%"></div>
+                                    <div class="skill-bar-fill w-[90%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -708,7 +688,7 @@
                                     <span class="text-sm font-medium text-gray-700">85%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                    <div class="skill-bar-fill w-[85%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -717,7 +697,7 @@
                                     <span class="text-sm font-medium text-gray-700">88%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 88%"></div>
+                                    <div class="skill-bar-fill w-[88%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -726,7 +706,7 @@
                                     <span class="text-sm font-medium text-gray-700">82%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 82%"></div>
+                                    <div class="skill-bar-fill w-[82%]"></div>
                                 </div>
                             </div>
                         </div>
@@ -741,7 +721,7 @@
                                     <span class="text-sm font-medium text-gray-700">92%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 92%"></div>
+                                    <div class="skill-bar-fill w-[92%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -750,7 +730,7 @@
                                     <span class="text-sm font-medium text-gray-700">95%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 95%"></div>
+                                    <div class="skill-bar-fill w-[95%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -759,7 +739,7 @@
                                     <span class="text-sm font-medium text-gray-700">93%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 93%"></div>
+                                    <div class="skill-bar-fill w-[93%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -768,7 +748,7 @@
                                     <span class="text-sm font-medium text-gray-700">87%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 87%"></div>
+                                    <div class="skill-bar-fill w-[87%]"></div>
                                 </div>
                             </div>
                         </div>
@@ -783,7 +763,7 @@
                                     <span class="text-sm font-medium text-gray-700">88%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 88%"></div>
+                                    <div class="skill-bar-fill w-[88%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -792,7 +772,7 @@
                                     <span class="text-sm font-medium text-gray-700">85%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 85%"></div>
+                                    <div class="skill-bar-fill w-[85%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -801,7 +781,7 @@
                                     <span class="text-sm font-medium text-gray-700">82%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 82%"></div>
+                                    <div class="skill-bar-fill w-[82%]"></div>
                                 </div>
                             </div>
                             <div class="skill-bar-container">
@@ -810,7 +790,7 @@
                                     <span class="text-sm font-medium text-gray-700">80%</span>
                                 </div>
                                 <div class="skill-bar-background">
-                                    <div class="skill-bar-fill" style="width: 80%"></div>
+                                    <div class="skill-bar-fill w-[80%]"></div>
                                 </div>
                             </div>
                         </div>
@@ -1128,7 +1108,7 @@
                     GitHub Activity
                 </h3>
                 <div class="mb-8">
-                    <img src="https://ghchart.rshah.org/0d9488/RenegadeJayhawk" alt="Brad Allen's GitHub Contribution Chart" class="w-full rounded-lg" style="background-color: var(--bg-secondary); padding: 1rem;">
+                    <img src="https://ghchart.rshah.org/0d9488/RenegadeJayhawk" alt="Brad Allen's GitHub Contribution Chart" class="w-full rounded-lg">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div class="stat-box text-center p-6 bg-gray-50 rounded-lg">
@@ -1178,7 +1158,7 @@
                                 <i class="fas fa-code-branch"></i> 3
                             </span>
                             <span class="flex items-center gap-1">
-                                <i class="fas fa-circle" style="font-size: 8px; color: #3178c6;"></i> TypeScript
+                                <i class="fas fa-circle text-[8px] text-[#3178c6]"></i> TypeScript
                             </span>
                         </div>
                         <div class="mt-4">
@@ -1208,7 +1188,7 @@
                                 <i class="fas fa-code-branch"></i> 2
                             </span>
                             <span class="flex items-center gap-1">
-                                <i class="fas fa-circle" style="font-size: 8px; color: #3572A5;"></i> Python
+                                <i class="fas fa-circle text-[8px] text-[#3572A5]"></i> Python
                             </span>
                         </div>
                         <div class="mt-4">
@@ -1238,7 +1218,7 @@
                                 <i class="fas fa-code-branch"></i> 5
                             </span>
                             <span class="flex items-center gap-1">
-                                <i class="fas fa-circle" style="font-size: 8px; color: #178600;"></i> C#
+                                <i class="fas fa-circle text-[8px] text-[#178600]"></i> C#
                             </span>
                         </div>
                         <div class="mt-4">
@@ -1268,7 +1248,7 @@
                                 <i class="fas fa-code-branch"></i> 7
                             </span>
                             <span class="flex items-center gap-1">
-                                <i class="fas fa-circle" style="font-size: 8px; color: #f1e05a;"></i> JavaScript
+                                <i class="fas fa-circle text-[8px] text-[#f1e05a]"></i> JavaScript
                             </span>
                         </div>
                         <div class="mt-4">
