@@ -198,11 +198,12 @@ body {
 
 /* Dark mode adjustments */
 body.dark-mode .timeline-title-wrapper h2 {
-    color: #E8EDF5; /* Light blue-gray for dark backgrounds */
+    color: #FFFFFF; /* Pure white for maximum contrast and readability */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
 body.dark-mode .timeline-description-wrapper p {
-    color: #D1D5DB; /* Light gray for dark mode readability */
+    color: #E5E7EB; /* Very light gray for excellent readability */
 }
 
 /* Responsive: Mobile layout (stacked single column) */
@@ -540,12 +541,12 @@ body.dark-mode .text-slate-800,
 body.dark-mode .text-gray-700,
 body.dark-mode .text-gray-600,
 body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
-    color: var(--text-primary);
+    color: #F9FAFB; /* Brighter white for better contrast */
 }
 
 body.dark-mode .text-gray-600,
 body.dark-mode .text-gray-500 {
-    color: var(--text-secondary);
+    color: #E5E7EB; /* Lighter gray for better readability */
 }
 
 body.dark-mode .border-gray-200,
@@ -570,7 +571,25 @@ body.dark-mode .kpi-title {
 }
 
 body.dark-mode .kpi-context {
-    color: var(--text-secondary);
+    color: #E5E7EB; /* Better visibility for context text */
+}
+
+/* Dark mode improvements for timeline and cards */
+body.dark-mode .timeline-content {
+    background-color: #1F2937; /* Darker background for content cards */
+    color: #F9FAFB;
+    border: 1px solid #374151; /* Subtle border for definition */
+}
+
+body.dark-mode .timeline-content h3,
+body.dark-mode .timeline-content h4,
+body.dark-mode .timeline-content strong {
+    color: #FFFFFF; /* Bright white for headings */
+}
+
+body.dark-mode .timeline-dot {
+    background-color: #1F2937; /* Match content card background */
+    border: 2px solid #374151; /* Border for definition */
 }
 
 /* Testimonial Cards */
