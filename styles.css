@@ -163,6 +163,69 @@ body {
     margin-top: 0.5rem;
 }
 
+/* ==========================================
+   CAREER TIMELINE - ASYMMETRICAL SPLIT TITLE
+   ========================================== */
+
+/* Main section container using CSS Grid for asymmetrical layout */
+.timeline-title-section {
+    display: grid;
+    grid-template-columns: 2fr 3fr; /* Asymmetrical: title takes 40%, description takes 60% */
+    gap: 4rem; /* Significant spacing between columns for visual separation */
+    align-items: start; /* Align content to top of grid cells */
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+/* Title wrapper - contains the h2 element */
+.timeline-title-wrapper h2 {
+    font-family: Georgia, 'Times New Roman', serif; /* Classic serif font for elegance */
+    font-size: 4.5rem; /* Large, impactful title (72px) */
+    font-weight: bold;
+    color: #1A2B4A; /* Dark Navy Blue for authority and professionalism */
+    line-height: 1.1; /* Tight line height for dramatic effect */
+    margin: 0;
+}
+
+/* Description wrapper - contains the p element */
+.timeline-description-wrapper p {
+    font-family: Arial, Helvetica, sans-serif; /* Clean sans-serif for readability */
+    font-size: 1.1rem; /* Slightly larger than body text (18px) */
+    color: #333333; /* Dark Gray for good contrast and readability */
+    line-height: 1.6; /* Comfortable line spacing for easy reading */
+    margin: 0;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .timeline-title-wrapper h2 {
+    color: #E8EDF5; /* Light blue-gray for dark backgrounds */
+}
+
+body.dark-mode .timeline-description-wrapper p {
+    color: #D1D5DB; /* Light gray for dark mode readability */
+}
+
+/* Responsive: Mobile layout (stacked single column) */
+@media (max-width: 768px) {
+    .timeline-title-section {
+        grid-template-columns: 1fr; /* Single column layout for mobile */
+        gap: 1.5rem; /* Reduced gap for mobile screens */
+        padding: 0 0.5rem;
+    }
+    
+    .timeline-title-wrapper h2 {
+        font-size: 2.5rem; /* Reduced title size for mobile (40px) */
+    }
+    
+    .timeline-description-wrapper p {
+        font-size: 1rem; /* Slightly smaller text for mobile (16px) */
+    }
+}
+
+/* ==========================================
+   CAREER TIMELINE - ITEMS
+   ========================================== */
+
 .timeline-item {
     margin-bottom: 2rem;
     display: flex;
