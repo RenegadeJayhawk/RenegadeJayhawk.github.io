@@ -72,57 +72,37 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header & Navigation -->
-    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <span class="text-xl font-bold">Brad Allen</span>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="#" class="nav-link active" onclick="showSection('overview', this)">Overview</a>
-                            <a href="#" class="nav-link" onclick="showSection('timeline', this)">Career Timeline</a>
-                            <a href="#" class="nav-link" onclick="showSection('ai-focus', this)">AI Focus</a>
-                            <a href="#" class="nav-link" onclick="showSection('achievements', this)">Key Achievements</a>
-                            <a href="#" class="nav-link" onclick="showSection('education-skills', this)">Education & Skills</a>
-                            <a href="#" class="nav-link" onclick="showSection('testimonials', this)">Testimonials</a>
-                            <a href="#" class="nav-link" onclick="showSection('contributions', this)">Contributions</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <select class="nav-link bg-gray-700" onchange="showSection(this.value, this)" aria-label="Navigation menu">
-                        <option value="overview" selected>Overview</option>
-                        <option value="timeline">Career Timeline</option>
-                        <option value="ai-focus">AI Focus</option>
-                        <option value="achievements">Key Achievements</option>
-                        <option value="education-skills">Education & Skills</option>
-                        <option value="testimonials">Testimonials</option>
-                        <option value="contributions">Contributions</option>
-                    </select>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="openContactModal()" class="hidden md:flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md font-medium transition-all">
-                        <i class="fas fa-envelope"></i> Contact
-                    </button>
-                    <button onclick="downloadResume()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md font-medium transition-all">
-                        <i class="fas fa-download"></i> <span class="hidden sm:inline">Download PDF</span>
-                    </button>
-                    <button onclick="toggleDarkMode()" class="flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
-                        <i class="fas fa-moon" id="darkModeIcon"></i>
-                    </button>
-                    <button onclick="toggleLanguage()" class="hidden md:flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="Change Language" aria-label="Change Language">
-                        <i class="fas fa-globe"></i>
-                        <span class="text-xs ml-1 font-semibold" id="currentLang">EN</span>
-                    </button>
-                    <button onclick="toggleChangelog()" class="hidden md:flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600 text-white transition-all" title="View Version History" aria-label="View Version History">
-                        <i class="fas fa-history"></i>
-                    </button>
-                </div>
-            </div>
+        <!-- Navigation Menu Redesign -->
+        <nav class="main-nav bg-white shadow-md fixed w-full z-50 top-0 left-0" role="navigation" aria-label="Main Navigation">
+          <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+                <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-teal-500" aria-label="Home" onclick="showSection('overview', this)">
+                    <img src="images/profile.jpg" alt="Brad Allen Logo" class="w-10 h-10 rounded-full object-cover shadow" loading="eager" width="40" height="40">
+                    <span class="font-bold text-lg text-slate-800 tracking-tight">Brad Allen</span>
+                </a>
+                <button id="navToggle" class="md:hidden text-2xl text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul id="navMenu" class="hidden md:flex gap-8 items-center font-medium text-slate-700 text-base" aria-label="Main menu">
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('overview', this)"><i class="fas fa-user mr-2"></i>Overview</a></li>
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('timeline', this)"><i class="fas fa-stream mr-2"></i>Timeline</a></li>
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('ai-focus', this)"><i class="fas fa-robot mr-2"></i>AI Focus</a></li>
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('achievements', this)"><i class="fas fa-trophy mr-2"></i>Achievements</a></li>
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('education-skills', this)"><i class="fas fa-graduation-cap mr-2"></i>Education & Skills</a></li>
+                    <li><a href="#" class="nav-link px-3 py-2 rounded" onclick="showSection('testimonials', this)"><i class="fas fa-comment-dots mr-2"></i>Testimonials</a></li>
+                </ul>
+          </div>
+          <!-- Mobile Menu -->
+          <div id="mobileNav" class="md:hidden fixed inset-0 bg-white bg-opacity-95 z-50 hidden flex flex-col items-center justify-center gap-8 text-lg font-semibold text-slate-800">
+            <button id="closeMobileNav" class="absolute top-6 right-6 text-3xl text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500" aria-label="Close menu"><i class="fas fa-times"></i></button>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('overview', this)"><i class="fas fa-user mr-2"></i>Overview</a>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('timeline', this)"><i class="fas fa-stream mr-2"></i>Timeline</a>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('ai-focus', this)"><i class="fas fa-robot mr-2"></i>AI Focus</a>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('achievements', this)"><i class="fas fa-trophy mr-2"></i>Achievements</a>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('education-skills', this)"><i class="fas fa-graduation-cap mr-2"></i>Education & Skills</a>
+            <a href="#" class="nav-link px-6 py-3 rounded" onclick="showSection('testimonials', this)"><i class="fas fa-comment-dots mr-2"></i>Testimonials</a>
+          </div>
         </nav>
-    </header>
+        <div class="pt-20"></div>
 
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
