@@ -1,13 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     showSection('overview', document.querySelector('.nav-link[onclick*="overview"]'));
-    
+
+    // Set Dynamic Copyright Year
+    const yearSpan = document.getElementById('copyrightYear');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Scroll Control: Force top on new navigation, retain on reloadin position on reload
+    // Force scroll to top on new navigation, but retain position on reload
+    if (window.performance && window.performance.navigation) {
+        // Deprecated API but widely supported fallback
+        if (window.performance.navigation.type === 0 && !window.location.hash) {
+            window.scrollTo(0, 0);
+        }
+    } else if (window.performance && window.performance.getEntriesByType) {
+        // Modern API
+        const navEntries = window.performance.getEntriesByType("navigation");
+        if (navEntries.length > 0 && navEntries[0].type === 'navigate' && !window.location.hash) {
+            window.scrollTo(0, 0);
+        }
+    }
+
+
     const aiSkillsData = {
         labels: [
-            'Generative AI', 
-            'LLMs (GPT, Claude, Gemini)', 
-            'NLP', 
-            'Prompt Engineering', 
-            'Applied AI Prototyping', 
+            'Generative AI',
+            'LLMs (GPT, Claude, Gemini)',
+            'NLP',
+            'Prompt Engineering',
+            'Applied AI Prototyping',
             'Responsible AI Practices'
         ],
         datasets: [{
@@ -18,66 +40,66 @@ document.addEventListener('DOMContentLoaded', () => {
             borderWidth: 1
         }]
     };
-    
+
     // Initialize chart with loading state
     const chartCanvas = document.getElementById('aiSkillsChart');
     const loadingState = document.getElementById('chartLoadingState');
     const chartContainer = chartCanvas ? chartCanvas.parentElement : null;
-    
+
     const initializeChart = () => {
         if (typeof Chart === 'undefined') {
             setTimeout(initializeChart, 100);
             return;
         }
-        
-        if(chartCanvas) {
+
+        if (chartCanvas) {
             const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
-            type: 'bar',
-            data: aiSkillsData,
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
+                type: 'bar',
+                data: aiSkillsData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
                         }
                     },
-                    y: {
-                        grid: {
+                    plugins: {
+                        legend: {
                             display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + '% Expertise';
+                                    }
+                                    return wrapText(label, 30);
                                 }
-                                if (context.parsed.x !== null) {
-                                    label += context.parsed.x + '% Expertise';
-                                }
-                                return wrapText(label, 30);
                             }
                         }
                     }
-                }
-            },
-            // Mobile-optimized chart configuration
-            responsive: true,
-            maintainAspectRatio: window.innerWidth > 768
-        });
-            
+                },
+                // Mobile-optimized chart configuration
+                responsive: true,
+                maintainAspectRatio: window.innerWidth > 768
+            });
+
             // Hide loading state and show chart
             setTimeout(() => {
                 if (loadingState) loadingState.style.display = 'none';
@@ -85,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 300);
         }
     };
-    
+
     initializeChart();
 
     // Initialize dark mode from localStorage
@@ -96,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize mobile features
     initMobileFeatures();
+    initMobileMenu();
 
     // Animate skill bars when they come into view
     const observerOptions = {
@@ -158,7 +181,7 @@ function toggleExpand(button) {
     const icon = button.querySelector('i');
     const span = button.querySelector('span');
     const isExpanded = content.classList.contains('expanded');
-    
+
     if (isExpanded) {
         content.classList.remove('expanded');
         icon.style.transform = 'rotate(0deg)';
@@ -179,20 +202,20 @@ function openContactModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
-    
+
     // Track modal open
     if (typeof gtag !== 'undefined') {
         gtag('event', 'contact_modal_open', {
             event_category: 'Engagement'
         });
     }
-    
+
     // Focus first input for accessibility
     setTimeout(() => {
         const firstInput = modal.querySelector('input');
         if (firstInput) firstInput.focus();
     }, 100);
-    
+
     announceToScreenReader('Contact form opened');
 }
 
@@ -200,16 +223,16 @@ function closeContactModal() {
     const modal = document.getElementById('contactModal');
     modal.classList.remove('show');
     document.body.style.overflow = 'auto';
-    
+
     // Return focus to the button that opened the modal
     const contactButton = document.querySelector('[onclick*="openContactModal"]');
     if (contactButton) contactButton.focus();
-    
+
     announceToScreenReader('Contact form closed');
 }
 
 // Close modal when clicking outside
-window.onclick = function(event) {
+window.onclick = function (event) {
     const modal = document.getElementById('contactModal');
     if (event.target === modal) {
         closeContactModal();
@@ -219,7 +242,7 @@ window.onclick = function(event) {
 // Handle Contact Form Submission
 function handleContactSubmit(event) {
     event.preventDefault();
-    
+
     // Track form submission
     if (typeof gtag !== 'undefined') {
         gtag('event', 'contact_form_submit', {
@@ -227,23 +250,23 @@ function handleContactSubmit(event) {
             event_label: 'Contact Form'
         });
     }
-    
+
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         subject: document.getElementById('subject').value,
         message: document.getElementById('message').value
     };
-    
+
     // Create mailto link with form data
-    const mailtoLink = `mailto:bradallen25010@frontier.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-    
+    const mailtoLink = `mailto:brightfuture99@duck.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+
     // Open default email client
     window.location.href = mailtoLink;
-    
+
     // Show success message
     alert('Your default email client will open. Please send the message from there.');
-    
+
     // Reset form and close modal
     document.getElementById('contactForm').reset();
     closeContactModal();
@@ -258,10 +281,10 @@ function downloadResume() {
             event_label: 'PDF Download'
         });
     }
-    
+
     // Option 1: Simple print dialog (user can save as PDF)
     window.print();
-    
+
     // Option 2: If you have a PDF file, use this instead:
     // const link = document.createElement('a');
     // link.href = 'brad-allen-resume.pdf';
@@ -276,13 +299,13 @@ function downloadResume() {
 // Update active navigation link
 function updateActiveNavLink(element) {
     if (!element) return;
-    
+
     // Remove active class and aria-current from all nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         link.removeAttribute('aria-current');
     });
-    
+
     // Add active class and aria-current to clicked link
     if (element.classList && element.classList.contains('nav-link')) {
         element.classList.add('active');
@@ -293,7 +316,7 @@ function updateActiveNavLink(element) {
 // Announce to screen readers using ARIA live region
 function announceToScreenReader(message) {
     let liveRegion = document.getElementById('aria-live-region');
-    
+
     if (!liveRegion) {
         liveRegion = document.createElement('div');
         liveRegion.id = 'aria-live-region';
@@ -302,7 +325,7 @@ function announceToScreenReader(message) {
         liveRegion.className = 'sr-only';
         document.body.appendChild(liveRegion);
     }
-    
+
     // Clear and set new message
     liveRegion.textContent = '';
     setTimeout(() => {
@@ -313,15 +336,15 @@ function announceToScreenReader(message) {
 // Handle keyboard navigation for cards
 function setupKeyboardNavigation() {
     const cards = document.querySelectorAll('.project-card, .achievement-card, .testimonial-card, .article-card, .repo-card');
-    
+
     cards.forEach(card => {
         // Make cards focusable
         if (!card.hasAttribute('tabindex')) {
             card.setAttribute('tabindex', '0');
         }
-        
+
         // Handle Enter and Space key for card interactions
-        card.addEventListener('keydown', function(e) {
+        card.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 const link = card.querySelector('a');
@@ -340,8 +363,8 @@ function trapFocusInModal(modal) {
     );
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
-    
-    modal.addEventListener('keydown', function(e) {
+
+    modal.addEventListener('keydown', function (e) {
         if (e.key === 'Tab') {
             if (e.shiftKey) {
                 if (document.activeElement === firstFocusable) {
@@ -355,7 +378,7 @@ function trapFocusInModal(modal) {
                 }
             }
         }
-        
+
         // Close modal on Escape key
         if (e.key === 'Escape') {
             closeContactModal();
@@ -371,16 +394,53 @@ function trapFocusInModal(modal) {
 const sectionOrder = ['overview', 'timeline', 'ai-focus', 'achievements', 'education-skills', 'testimonials', 'contributions'];
 let currentSectionIndex = 0;
 
+function initMobileMenu() {
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeMobileNav = document.getElementById('closeMobileNav');
+    const mobileNavLinks = mobileNav ? mobileNav.querySelectorAll('a') : [];
+
+    if (navToggle && mobileNav) {
+        navToggle.addEventListener('click', () => {
+            mobileNav.classList.remove('hidden');
+            mobileNav.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            navToggle.setAttribute('aria-expanded', 'true');
+        });
+    }
+
+    if (closeMobileNav && mobileNav) {
+        closeMobileNav.addEventListener('click', () => {
+            mobileNav.classList.add('hidden');
+            mobileNav.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // Close menu when a link is clicked
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileNav) {
+                mobileNav.classList.add('hidden');
+                mobileNav.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+                if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+}
+
 function initMobileFeatures() {
     // Pull to refresh
     initPullToRefresh();
-    
+
     // Swipe gestures
     initSwipeGestures();
-    
+
     // Optimize chart for mobile
     optimizeChartForMobile();
-    
+
     // Auto-hide swipe indicator after first use
     setTimeout(() => {
         const indicator = document.querySelector('.swipe-indicator');
@@ -399,25 +459,25 @@ function initPullToRefresh() {
     let isPulling = false;
     const pullThreshold = 80;
     const refreshIndicator = document.getElementById('pullToRefresh');
-    
+
     if (!refreshIndicator) return;
-    
+
     document.addEventListener('touchstart', (e) => {
         if (window.scrollY === 0) {
             startY = e.touches[0].clientY;
             isPulling = true;
         }
     }, { passive: true });
-    
+
     document.addEventListener('touchmove', (e) => {
         if (!isPulling) return;
-        
+
         const currentY = e.touches[0].clientY;
         const pullDistance = currentY - startY;
-        
+
         if (pullDistance > 0 && pullDistance < pullThreshold * 2) {
             refreshIndicator.style.top = `${Math.min(pullDistance - 80, 0)}px`;
-            
+
             if (pullDistance > pullThreshold) {
                 refreshIndicator.classList.add('active');
                 refreshIndicator.querySelector('.pull-to-refresh-text').textContent = 'Release to refresh';
@@ -427,16 +487,16 @@ function initPullToRefresh() {
             }
         }
     }, { passive: true });
-    
+
     document.addEventListener('touchend', () => {
         if (!isPulling) return;
-        
+
         const isActive = refreshIndicator.classList.contains('active');
-        
+
         if (isActive) {
             refreshIndicator.classList.add('refreshing');
             refreshIndicator.querySelector('.pull-to-refresh-text').textContent = 'Refreshing...';
-            
+
             // Simulate refresh (reload page or update content)
             setTimeout(() => {
                 location.reload();
@@ -444,7 +504,7 @@ function initPullToRefresh() {
         } else {
             refreshIndicator.style.top = '-80px';
         }
-        
+
         isPulling = false;
     }, { passive: true });
 }
@@ -457,24 +517,24 @@ function initSwipeGestures() {
     let touchEndY = 0;
     const swipeThreshold = 50;
     const main = document.getElementById('main-content');
-    
+
     if (!main) return;
-    
+
     main.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
         touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
-    
+
     main.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
         touchEndY = e.changedTouches[0].screenY;
         handleSwipe();
     }, { passive: true });
-    
+
     function handleSwipe() {
         const xDiff = touchStartX - touchEndX;
         const yDiff = touchStartY - touchEndY;
-        
+
         // Check if horizontal swipe is more significant than vertical
         if (Math.abs(xDiff) > Math.abs(yDiff) && Math.abs(xDiff) > swipeThreshold) {
             if (xDiff > 0) {
@@ -501,27 +561,27 @@ function navigateToPreviousSection() {
 function navigateToSection(index, direction) {
     const sectionName = sectionOrder[index];
     const targetSection = document.querySelector(`[data-section="${sectionName}"]`);
-    
+
     if (!targetSection) return;
-    
+
     // Add swipe animation
     targetSection.classList.add(`swipe-${direction}`);
-    
+
     // Navigate to section
     showSection(sectionName);
     currentSectionIndex = index;
-    
+
     // Update mobile select if exists
     const mobileSelect = document.querySelector('select.nav-link');
     if (mobileSelect) {
         mobileSelect.value = sectionName;
     }
-    
+
     // Remove animation class after animation completes
     setTimeout(() => {
         targetSection.classList.remove(`swipe-${direction}`);
     }, 300);
-    
+
     // Provide haptic feedback if available
     if ('vibrate' in navigator) {
         navigator.vibrate(10);
@@ -607,23 +667,23 @@ function toggleLanguage() {
     const currentIndex = langKeys.indexOf(currentLanguage);
     const nextIndex = (currentIndex + 1) % langKeys.length;
     currentLanguage = langKeys[nextIndex];
-    
+
     const lang = languages[currentLanguage];
-    
+
     // Update UI
     const langElements = document.querySelectorAll('#currentLang');
     langElements.forEach(el => {
         el.textContent = lang.code;
     });
-    
+
     const footerLang = document.getElementById('footerLang');
     if (footerLang) {
         footerLang.textContent = `${lang.flag} ${lang.name}`;
     }
-    
+
     // Store preference
     localStorage.setItem('preferredLanguage', currentLanguage);
-    
+
     // Track language change
     if (typeof gtag !== 'undefined') {
         gtag('event', 'language_change', {
@@ -631,13 +691,13 @@ function toggleLanguage() {
             event_category: 'Localization'
         });
     }
-    
+
     // Announce to screen reader
     announceToScreenReader(`Language changed to ${lang.name}`);
-    
+
     // Show notification
     showNotification(`Language changed to ${lang.flag} ${lang.name}`, 'info');
-    
+
     // In a real implementation, you would load translations here
     // loadTranslations(currentLanguage);
 }
@@ -645,7 +705,7 @@ function toggleLanguage() {
 // Toggle Changelog Modal
 function toggleChangelog() {
     const modal = document.getElementById('changelogModal');
-    
+
     if (modal.classList.contains('show')) {
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
@@ -654,14 +714,14 @@ function toggleChangelog() {
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
         announceToScreenReader('Changelog opened');
-        
+
         // Track changelog view
         if (typeof gtag !== 'undefined') {
             gtag('event', 'changelog_view', {
                 event_category: 'Engagement'
             });
         }
-        
+
         // Focus first element
         setTimeout(() => {
             const firstEntry = modal.querySelector('.changelog-entry');
@@ -681,7 +741,7 @@ function showNotification(message, type = 'info') {
             <span>${message}</span>
         </div>
     `;
-    
+
     // Add styles inline for simplicity
     Object.assign(notification.style, {
         position: 'fixed',
@@ -697,9 +757,9 @@ function showNotification(message, type = 'info') {
         fontSize: '14px',
         fontWeight: '500'
     });
-    
+
     document.body.appendChild(notification);
-    
+
     // Remove after 3 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
@@ -714,7 +774,7 @@ function updateLastUpdatedDate() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = now.toLocaleDateString('en-US', options);
-    
+
     // Update all instances
     const lastUpdatedElements = document.querySelectorAll('#lastUpdated, #footerLastUpdated');
     lastUpdatedElements.forEach(el => {
@@ -741,10 +801,10 @@ function initProfessionalFeatures() {
             footerLang.textContent = `${lang.flag} ${lang.name}`;
         }
     }
-    
+
     // Update version info
     updateVersionInfo();
-    
+
     // Close modals on outside click
     window.addEventListener('click', (e) => {
         const changelogModal = document.getElementById('changelogModal');
@@ -805,9 +865,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleDarkMode() {
     const body = document.body;
     const icon = document.getElementById('darkModeIcon');
-    
+
     body.classList.toggle('dark-mode');
-    
+
     if (body.classList.contains('dark-mode')) {
         icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('darkMode', 'enabled');
@@ -831,7 +891,7 @@ function initInteractiveElements() {
             }
         });
     }, { threshold: 0.5 });
-    
+
     const achievementsSection = document.querySelector('[data-section="achievements"]');
     if (achievementsSection) {
         achievementsObserver.observe(achievementsSection);
@@ -848,16 +908,16 @@ function filterSkills(searchTerm) {
     const skillTags = document.querySelectorAll('.skill-tag');
     const noSkillsMessage = document.getElementById('noSkillsMessage');
     let visibleCount = 0;
-    
+
     searchTerm = searchTerm.toLowerCase().trim();
-    
+
     skillTags.forEach(tag => {
         const skillName = tag.dataset.skill.toLowerCase();
         const category = tag.dataset.category;
-        
+
         const matchesSearch = searchTerm === '' || skillName.includes(searchTerm);
         const matchesCategory = currentSkillFilter === 'all' || category === currentSkillFilter;
-        
+
         if (matchesSearch && matchesCategory) {
             tag.classList.remove('hidden');
             visibleCount++;
@@ -865,14 +925,14 @@ function filterSkills(searchTerm) {
             tag.classList.add('hidden');
         }
     });
-    
+
     // Show/hide no results message
     if (visibleCount === 0) {
         noSkillsMessage.classList.remove('hidden');
     } else {
         noSkillsMessage.classList.add('hidden');
     }
-    
+
     // Track skill search
     if (typeof gtag !== 'undefined' && searchTerm) {
         gtag('event', 'skill_search', {
@@ -884,20 +944,20 @@ function filterSkills(searchTerm) {
 
 function filterSkillsByCategory(category) {
     currentSkillFilter = category;
-    
+
     // Update active filter button
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     event.target.classList.add('active');
-    
+
     // Re-apply current search with new filter
     const searchInput = document.getElementById('skillSearch');
     filterSkills(searchInput.value);
-    
+
     // Announce to screen reader
     announceToScreenReader(`Showing ${category === 'all' ? 'all' : category} skills`);
-    
+
     // Track category filter
     if (typeof gtag !== 'undefined') {
         gtag('event', 'skill_filter', {
@@ -913,7 +973,7 @@ function filterSkillsByCategory(category) {
 
 function animateKPICounters() {
     const kpiCards = document.querySelectorAll('.kpi-card');
-    
+
     kpiCards.forEach((card, index) => {
         setTimeout(() => {
             const valueElement = card.querySelector('.kpi-value');
@@ -921,10 +981,10 @@ function animateKPICounters() {
             const prefix = valueElement.dataset.prefix || '';
             const suffix = valueElement.dataset.suffix || '';
             const decimals = parseInt(valueElement.dataset.decimals) || 0;
-            
+
             animateCounter(valueElement, 0, target, 2000, prefix, suffix, decimals);
             card.classList.add('animating');
-            
+
             setTimeout(() => {
                 card.classList.remove('animating');
             }, 2500);
@@ -936,15 +996,15 @@ function animateCounter(element, start, end, duration, prefix, suffix, decimals)
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
-    
+
     const timer = setInterval(() => {
         current += increment;
-        
+
         if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
             current = end;
             clearInterval(timer);
         }
-        
+
         const displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
         element.textContent = `${prefix}${displayValue}${suffix}`;
     }, 16);
@@ -1067,13 +1127,13 @@ const projectDetails = {
 function showProjectDetails(projectId) {
     const project = projectDetails[projectId];
     if (!project) return;
-    
+
     const modal = document.getElementById('projectModal');
     const titleElement = document.getElementById('projectTitle');
     const contentElement = document.getElementById('projectContent');
-    
+
     titleElement.textContent = project.title;
-    
+
     contentElement.innerHTML = `
         <div class="project-detail-section">
             <h3 class="text-lg font-semibold text-slate-800 mb-3">
@@ -1118,10 +1178,10 @@ function showProjectDetails(projectId) {
             </button>
         </div>
     `;
-    
+
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
-    
+
     // Track project view
     if (typeof gtag !== 'undefined') {
         gtag('event', 'project_details_view', {
@@ -1129,7 +1189,7 @@ function showProjectDetails(projectId) {
             event_category: 'Projects'
         });
     }
-    
+
     announceToScreenReader(`${project.title} details opened`);
 }
 
@@ -1178,4 +1238,37 @@ function showSection(sectionId, element) {
 
     // Announce section change to screen readers
     announceToScreenReader(`Navigated to ${sectionId} section`);
+}
+
+// More AI Efforts Toggle
+function toggleAIEfforts(button) {
+    const grid = document.getElementById('aiEffortsGrid');
+    const icon = button.querySelector('i');
+
+    grid.classList.toggle('expanded');
+
+    if (grid.classList.contains('expanded')) {
+        icon.style.transform = 'rotate(180deg)';
+        button.querySelector('span').textContent = 'Less AI efforts';
+    } else {
+        icon.style.transform = 'rotate(0deg)';
+        button.querySelector('span').textContent = 'More AI efforts';
+    }
+}
+
+// Certifications Toggle
+function toggleCertifications(button) {
+    const hiddenCerts = document.getElementById('moreCertifications');
+    const icon = button.querySelector('i');
+    const span = button.querySelector('span');
+
+    if (hiddenCerts.style.display === 'block') {
+        hiddenCerts.style.display = 'none';
+        span.textContent = 'Show more certifications';
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        hiddenCerts.style.display = 'block';
+        span.textContent = 'Show less certifications';
+        icon.style.transform = 'rotate(180deg)';
+    }
 }

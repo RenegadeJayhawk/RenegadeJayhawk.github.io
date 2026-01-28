@@ -227,7 +227,7 @@ Edit CSS custom properties in `styles.css`:
 
 ## 📧 Contact
 
-- **Email**: [bradallen25010@frontier.com](mailto:bradallen25010@frontier.com)
+- **Email**: [brightfuture99@duck.com](mailto:brightfuture99@duck.com)
 - **LinkedIn**: [linkedin.com/in/bradallen-techleader](https://linkedin.com/in/bradallen-techleader)
 
 ## 📝 License
